@@ -1,4 +1,4 @@
 class StaticFun{
-  static var waveFunction;
+  static Function(double) waveFunction;
   static double yOffset = 0.0;
 }

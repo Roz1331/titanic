@@ -43,6 +43,7 @@ class _WaveSettingsState extends State<WaveSettings> {
       child: Column(
         children: [
           RadioListTile(
+            selected: true,
             activeColor: Color(0xFF000060),
             value: (double x) => sin(x),
             groupValue: StaticFun.waveFunction,
@@ -54,14 +55,14 @@ class _WaveSettingsState extends State<WaveSettings> {
             value: (double x) => 2 * sin(x),
             groupValue: StaticFun.waveFunction,
             onChanged: setSelectedRadioTile,
-            title: Text("2 функция"),
+            title: Text("2*sin(x)"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: (double x) => sin(x) / 2,
             groupValue: StaticFun.waveFunction,
             onChanged: setSelectedRadioTile,
-            title: Text("3 функция"),
+            title: Text("sin(x)/2"),
           ),
         ],
       ),
