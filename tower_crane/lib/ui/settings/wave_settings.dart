@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
+import '../../stupid_constants.dart';
 import '../responsive_size.dart';
 
 class WaveSettings extends StatefulWidget {
@@ -7,16 +12,16 @@ class WaveSettings extends StatefulWidget {
 }
 
 class _WaveSettingsState extends State<WaveSettings> {
-  int selectedRadioTile;
+  Timer timer;
   @override
   void initState() {
     super.initState();
-    selectedRadioTile = 0;
+    StaticFun.selectedRadioTile = (double x) => x;
   }
 
-  setSelectedRadioTile(int val) {
+  setSelectedRadioTile(dynamic val) {
     setState(() {
-      selectedRadioTile = val;
+      StaticFun.selectedRadioTile = val;
     });
   }
 
@@ -39,27 +44,32 @@ class _WaveSettingsState extends State<WaveSettings> {
         children: [
           RadioListTile(
             activeColor: Color(0xFF000060),
-            value: 1,
-            groupValue: selectedRadioTile,
+            value: (double x) => sin(x),
+            groupValue: StaticFun.selectedRadioTile,
             onChanged: setSelectedRadioTile,
-            title: Text("1 функция"),
+            title: Text("sin(x)"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
-            value: 2,
-            groupValue: selectedRadioTile,
+            value: (double x) => 2 * sin(x),
+            groupValue: StaticFun.selectedRadioTile,
             onChanged: setSelectedRadioTile,
             title: Text("2 функция"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
-            value: 3,
-            groupValue: selectedRadioTile,
+            value: (double x) => sin(x) / 2,
+            groupValue: StaticFun.selectedRadioTile,
             onChanged: setSelectedRadioTile,
             title: Text("3 функция"),
           ),
         ],
       ),
     );
+  }
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
   }
 }

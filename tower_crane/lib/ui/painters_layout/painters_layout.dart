@@ -1,8 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
 import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import '../responsive_size.dart';
-class PaintersLayout extends StatelessWidget {
+class PaintersLayout extends StatefulWidget {
+  @override
+  _PaintersLayoutState createState() => _PaintersLayoutState();
+}
+
+class _PaintersLayoutState extends State<PaintersLayout> {
+  Timer timer;
+  double yOffset = -1;
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,5 +51,6 @@ class PaintersLayout extends StatelessWidget {
         ],
       ),
     );
+
   }
 }
