@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/wave_settings.dart';
 
 import '../responsive_size.dart';
 
 class ShipSidePainter extends CustomPainter {
-  double yOffset = 0.0;
+  double yOffset;
   @override
   void paint(Canvas canvas, Size size) {
     Paint wavePainter = Paint()
@@ -42,6 +43,10 @@ class ShipSidePainter extends CustomPainter {
 
     canvas.drawPath(ship, shipPainter);
     canvas.drawPath(wave, wavePainter);
+  }
+
+  ShipSidePainter(double rads){
+    yOffset = 20 * StaticFun.waveFunction(rads);
   }
 
   @override

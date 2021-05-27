@@ -11,7 +11,17 @@ class PaintersLayout extends StatefulWidget {
 
 class _PaintersLayoutState extends State<PaintersLayout> {
   Timer timer;
-  double yOffset = -1;
+  double yOffset = 0.0;
+  double radians = 0.0;
+  @override
+  void initState() {
+    timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+      setState(() {
+       radians += 0.01;
+      });
+    });
+    super.initState();
+  }
   @override
   void dispose() {
     timer?.cancel();
@@ -45,7 +55,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
             height: 357.height,
             width: 1536.width,
             child: CustomPaint(
-              painter: ShipSidePainter(),
+              painter: ShipSidePainter(radians),
             ),
           ),
         ],

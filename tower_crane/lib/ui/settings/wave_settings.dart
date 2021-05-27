@@ -16,12 +16,12 @@ class _WaveSettingsState extends State<WaveSettings> {
   @override
   void initState() {
     super.initState();
-    StaticFun.selectedRadioTile = (double x) => x;
+    StaticFun.waveFunction = (double x) => sin(x);
   }
 
   setSelectedRadioTile(dynamic val) {
     setState(() {
-      StaticFun.selectedRadioTile = val;
+      StaticFun.waveFunction = val;
     });
   }
 
@@ -45,21 +45,21 @@ class _WaveSettingsState extends State<WaveSettings> {
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: (double x) => sin(x),
-            groupValue: StaticFun.selectedRadioTile,
+            groupValue: StaticFun.waveFunction,
             onChanged: setSelectedRadioTile,
             title: Text("sin(x)"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: (double x) => 2 * sin(x),
-            groupValue: StaticFun.selectedRadioTile,
+            groupValue: StaticFun.waveFunction,
             onChanged: setSelectedRadioTile,
             title: Text("2 функция"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: (double x) => sin(x) / 2,
-            groupValue: StaticFun.selectedRadioTile,
+            groupValue: StaticFun.waveFunction,
             onChanged: setSelectedRadioTile,
             title: Text("3 функция"),
           ),

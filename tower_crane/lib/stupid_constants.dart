@@ -1,4 +1,4 @@
 class StaticFun{
-  static var selectedRadioTile;
+  static var waveFunction;
   static double yOffset = 0.0;
 }
