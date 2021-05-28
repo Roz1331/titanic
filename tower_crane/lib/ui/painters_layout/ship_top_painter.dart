@@ -15,15 +15,15 @@ class ShipTopPainter extends CustomPainter {
       ..color = Color(0xFF000060);
 
     var ship = Path();
-    ship.moveTo(41.width, 198.height);
-    ship.lineTo(121.width, 79.height);
-    ship.lineTo(1051.width, 79.height);
-    ship.lineTo(1132.width, 198.height);
-    ship.lineTo(1051.width, 318.height);
-    ship.lineTo(121.width, 318.height);
+    ship.moveTo(41.w, 198.h);
+    ship.lineTo(121.w, 79.h);
+    ship.lineTo(1051.w, 79.h);
+    ship.lineTo(1132.w, 198.h);
+    ship.lineTo(1051.w, 318.h);
+    ship.lineTo(121.w, 318.h);
 
     var leftTop = Offset(0, 0);
-    var rightBottom = Offset(1172.width, 357.height);
+    var rightBottom = Offset(1172.w, 357.h);
 
     canvas.drawRect(Rect.fromPoints(leftTop, rightBottom), seaPainter);
     canvas.drawPath(ship, painter);

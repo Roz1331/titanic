@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../stupid_constants.dart';
+import '../../world_state.dart';
 import '../responsive_size.dart';
 
 class WaveSettings extends StatefulWidget {
@@ -15,7 +16,7 @@ class _WaveSettingsState extends State<WaveSettings> {
 
   setSelectedRadioTile(dynamic val) {
     setState(() {
-      StaticFun.waveFunction = WaveFunctionsHelper.functions[val];
+      WorldState.waveFunction = WaveFunctionsHelper.functions[val];
       selectedTile = val;
     });
   }
@@ -24,7 +25,7 @@ class _WaveSettingsState extends State<WaveSettings> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: 20.height,
+        vertical: 20.h,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -33,8 +34,8 @@ class _WaveSettingsState extends State<WaveSettings> {
           width: 2,
         ),
       ),
-      height: 230.height,
-      width: 283.width,
+      height: 230.h,
+      width: 283.w,
       child: Column(
         children: [
           RadioListTile(

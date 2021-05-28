@@ -7,7 +7,7 @@ class StartSimulationButton extends StatelessWidget {
     return ElevatedButton.icon(
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all<Size>(
-          Size(283.width, 80.height),
+          Size(283.w, 80.h),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(
           Color(0xFF000060),

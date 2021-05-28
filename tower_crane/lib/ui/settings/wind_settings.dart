@@ -13,7 +13,7 @@ class _WindSettingsState extends State<WindSettings> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: 20.height,
+        vertical: 20.h,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -22,14 +22,14 @@ class _WindSettingsState extends State<WindSettings> {
           width: 2,
         ),
       ),
-      height: 200.height,
-      width: 283.width,
+      height: 200.h,
+      width: 283.w,
       child: Column(
         children: [
           Text(
             "Направление",
             style: TextStyle(
-              fontSize: 14.height,
+              fontSize: 14.h,
             ),
           ),
           Slider(
@@ -51,7 +51,7 @@ class _WindSettingsState extends State<WindSettings> {
           Text(
             "Скорость",
             style: TextStyle(
-              fontSize: 14.height,
+              fontSize: 14.h,
             ),
           ),
           Slider(

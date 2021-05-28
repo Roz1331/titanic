@@ -14,9 +14,9 @@ class MainLayout extends StatelessWidget {
             PaintersLayout(),
             Container(
               padding: EdgeInsets.only(
-                top: 79.height,
+                top: 79.h,
               ),
-              width: 364.width,
+              width: 364.w,
               child: Settings(),
             )
           ],
