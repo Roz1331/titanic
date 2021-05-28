@@ -11,7 +11,6 @@ class WaveSettings extends StatefulWidget {
 }
 
 class _WaveSettingsState extends State<WaveSettings> {
-  Timer timer;
   int selectedTile = 0;
 
   setSelectedRadioTile(dynamic val) {
@@ -39,7 +38,7 @@ class _WaveSettingsState extends State<WaveSettings> {
       child: Column(
         children: [
           RadioListTile(
-            selected: true,
+            //selected: true,
             activeColor: Color(0xFF000060),
             value: 0,
             groupValue: selectedTile,
@@ -63,11 +62,5 @@ class _WaveSettingsState extends State<WaveSettings> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
   }
 }
