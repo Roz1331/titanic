@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
 import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
+import 'package:tower_crane/world_state.dart';
 import '../responsive_size.dart';
 class PaintersLayout extends StatefulWidget {
   @override
@@ -18,6 +20,8 @@ class _PaintersLayoutState extends State<PaintersLayout> {
       setState(() {
        radians += 0.01;
       });
+      WorldState.shipZ += WaveDimensions.amplitude * (WorldState.waveFunction(radians) - WorldState.waveFunction(radians - 0.01));
+      WorldState.waveZ += WaveDimensions.amplitude * (WorldState.waveFunction(radians) - WorldState.waveFunction(radians - 0.01));
     });
     super.initState();
   }
@@ -37,12 +41,12 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           ),
         ),
       ),
-      width: 1172.width,
+      width: 1172.w,
       child: Column(
         children: [
           Container(
-            height: 357.height,
-            width: 1536.width,
+            height: 357.h,
+            width: 1536.w,
             child: CustomPaint(
               painter: ShipTopPainter(),
             ),
@@ -51,8 +55,8 @@ class _PaintersLayoutState extends State<PaintersLayout> {
             thickness: 2,
           ),
           Container(
-            height: 357.height,
-            width: 1536.width,
+            height: 357.h,
+            width: 1536.w,
             child: CustomPaint(
               painter: ShipSidePainter(radians),
             ),

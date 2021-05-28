@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tower_crane/stupid_constants.dart';
 
 
+import '../../world_state.dart';
 import '../responsive_size.dart';
 
 class ShipSidePainter extends CustomPainter {
-  double yOffset;
+  double rads;
   @override
   void paint(Canvas canvas, Size size) {
     Paint wavePainter = Paint()
@@ -18,39 +19,40 @@ class ShipSidePainter extends CustomPainter {
       ..color = Color(0xFF000060);
 
     var ship = Path();
-    ship.moveTo(81.width, 278.height + yOffset );
-    ship.lineTo(1091.width, 278.height + yOffset );
-    ship.lineTo(1011.width, 357.height + yOffset );
-    ship.lineTo(162.width, 357.height + yOffset );
+    var leftPart = WorldState.shipX - (ShipDimensions.length/2);
+    var rightPart = leftPart + ShipDimensions.length;
+    var bottomPart = WorldState.shipZ + ShipDimensions.height;
+    ship.moveTo(leftPart.w, WorldState.shipZ.h);
+    ship.lineTo(rightPart.w, WorldState.shipZ.h);
+    ship.lineTo((rightPart - ShipDimensions.sternBevel).w, bottomPart.h);
+    ship.lineTo((leftPart + ShipDimensions.sternBevel).w, bottomPart.h);
     ship.close();
 
     var wave = Path();
-    wave.moveTo(0, 754.height + yOffset );
-    wave.lineTo(0, (675 - 357).height+ yOffset );
-    var firstControlPoint = Offset(283.width, (714 - 357).height + yOffset );
-    var firstEndPoint = Offset(566.width, (675 - 357).height + yOffset );
+    wave.moveTo(0, WorldState.waveZ.h);
+    wave.lineTo(0, (WorldState.waveZ - WaveDimensions.height).h);
+    var firstControlPoint = Offset(283.w, (WorldState.waveZ - WaveDimensions.height + 40).h);
+    var firstEndPoint = Offset(566.w, (WorldState.waveZ - WaveDimensions.height).h);
     var secondControlPoint =
-        Offset(889.width, (635 - 357).height+ yOffset );
-    var secondEndPoint = Offset(1172.width, (675 - 357).height + yOffset );
+        Offset(889.w, (WorldState.waveZ - WaveDimensions.height - 40).h );
+    var secondEndPoint = Offset(PainterDimensions.width.w, (WorldState.waveZ - WaveDimensions.height).h);
 
     wave.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
         firstEndPoint.dx, firstEndPoint.dy);
     wave.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
         secondEndPoint.dx, secondEndPoint.dy);
 
-    wave.lineTo(1172.width, 754.height + yOffset );
+    wave.lineTo(PainterDimensions.width.w, WorldState.waveZ );
     wave.close();
 
     canvas.drawPath(ship, shipPainter);
     canvas.drawPath(wave, wavePainter);
   }
 
-  ShipSidePainter(double rads){
-    yOffset = 20 * StaticFun.waveFunction(rads);
-  }
+  ShipSidePainter(this.rads);
 
   @override
-  bool shouldRepaint(ShipSidePainter oldDelegate) => oldDelegate.yOffset != this.yOffset;
+  bool shouldRepaint(ShipSidePainter oldDelegate) => oldDelegate.rads != this.rads;
 
   @override
   bool shouldRebuildSemantics(ShipSidePainter oldDelegate) => false;

@@ -12,15 +12,15 @@ class Settings extends StatelessWidget {
       children: [
         WindSettings(),
         SizedBox(
-          height: 30.height,
+          height: 30.h,
         ),
         WaveSettings(),
         SizedBox(
-          height: 30.height,
+          height: 30.h,
         ),
         StartSimulationButton(),
         SizedBox(
-          height: 30.height,
+          height: 30.h,
         ),
         MusicButton(),
       ],

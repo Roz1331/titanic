@@ -1,10 +1,5 @@
 import 'dart:math';
 
-class StaticFun{
-  static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
-  static double yOffset = 0.0;
-}
-
 class WaveFunctionsHelper {
   static List<Function(double)> functions = [
     (double x) => sin(x),
@@ -17,4 +12,21 @@ class WaveFunctionsHelper {
     "sin(2*x) * cos(x/4)",
     "(cos(x/2))^2 * |sin(2*x)|"
   ];
+}
+
+class ShipDimensions{
+  static int length = 1091;
+  static int width = 239;
+  static int height = 79;
+  static int sternBevel = 80;
+}
+
+class PainterDimensions{
+  static int width = 1172;
+  static int height = 357;
+}
+
+class WaveDimensions{
+  static int height = 150;
+  static int amplitude = 20;
 }
