@@ -8,13 +8,13 @@ class StaticFun{
 class WaveFunctionsHelper {
   static List<Function(double)> functions = [
     (double x) => sin(x),
-    (double x) => sin(8*x),
-    (double x) => sin(x/2),
+    (double x) => sin(2*x) * cos(x/4),
+    (double x) => pow(cos(x/2),2) * sin(2*x).abs(),
   ];
 
   static List<String> functionStrings = [
     "sin(x)",
-    "sin(8*x)",
-    "sin(x/2),"
+    "sin(2*x) * cos(x/4)",
+    "(cos(x/2))^2 * |sin(2*x)|"
   ];
 }

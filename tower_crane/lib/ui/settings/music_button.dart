@@ -15,13 +15,13 @@ class _MusicButtonState extends State<MusicButton> {
 
   String playerStatusText(){
     if (!isOpened){
-      return "Погрустить под музыку";
+      return "Задать настроение";
     }
     else if (isPlaying){
-      return "Хватит слёз";
+      return "Давайте помолчим";
     }
     else {
-      return "Продолжить грусть";
+      return "Продолжить грустить";
     }
   }
   @override
