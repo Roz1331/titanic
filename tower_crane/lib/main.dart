@@ -11,14 +11,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-    // assetsAudioPlayer.open(
-    //   Audio(
-    //     "assets/Titanik.mp3",
-    //   ),
-    //   loopMode: LoopMode.single,
-    //   autoStart: true,
-    // );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Титаник',

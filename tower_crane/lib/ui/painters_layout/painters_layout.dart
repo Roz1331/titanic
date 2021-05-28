@@ -11,7 +11,6 @@ class PaintersLayout extends StatefulWidget {
 
 class _PaintersLayoutState extends State<PaintersLayout> {
   Timer timer;
-  double yOffset = 0.0;
   double radians = 0.0;
   @override
   void initState() {
