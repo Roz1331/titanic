@@ -13,15 +13,16 @@ class WaveSettings extends StatefulWidget {
 
 class _WaveSettingsState extends State<WaveSettings> {
   Timer timer;
-  @override
-  void initState() {
-    super.initState();
-    StaticFun.waveFunction = (double x) => sin(x);
-  }
+  int selectedTile = 1;
 
   setSelectedRadioTile(dynamic val) {
     setState(() {
-      StaticFun.waveFunction = val;
+      switch(val){
+        case 1: StaticFun.waveFunction = (double x) => sin(x); break;
+        case 2: StaticFun.waveFunction = (double x) => sin(8*x); break;
+        case 3: StaticFun.waveFunction = (double x) => sin(x/2); break;
+      }
+      selectedTile = val;
     });
   }
 
@@ -38,29 +39,29 @@ class _WaveSettingsState extends State<WaveSettings> {
           width: 2,
         ),
       ),
-      height: 200.height,
+      height: 230.height,
       width: 283.width,
       child: Column(
         children: [
           RadioListTile(
             selected: true,
             activeColor: Color(0xFF000060),
-            value: (double x) => sin(x),
-            groupValue: StaticFun.waveFunction,
+            value: 1,
+            groupValue: selectedTile,
             onChanged: setSelectedRadioTile,
             title: Text("sin(x)"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
-            value: (double x) => 2 * sin(x),
-            groupValue: StaticFun.waveFunction,
+            value: 2,
+            groupValue: selectedTile,
             onChanged: setSelectedRadioTile,
             title: Text("2*sin(x)"),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
-            value: (double x) => sin(x) / 2,
-            groupValue: StaticFun.waveFunction,
+            value: 3,
+            groupValue: selectedTile,
             onChanged: setSelectedRadioTile,
             title: Text("sin(x)/2"),
           ),
