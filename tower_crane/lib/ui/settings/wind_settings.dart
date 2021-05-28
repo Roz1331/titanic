@@ -28,6 +28,9 @@ class _WindSettingsState extends State<WindSettings> {
         children: [
           Text(
             "Направление",
+            style: TextStyle(
+              fontSize: 14.height,
+            ),
           ),
           Slider(
             divisions: 360,
@@ -47,6 +50,9 @@ class _WindSettingsState extends State<WindSettings> {
           ),
           Text(
             "Скорость",
+            style: TextStyle(
+              fontSize: 14.height,
+            ),
           ),
           Slider(
             divisions: 46,

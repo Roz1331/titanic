@@ -13,7 +13,9 @@ class StartSimulationButton extends StatelessWidget {
           Color(0xFF000060),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        
+      },
       icon: Icon(
         Icons.play_arrow_rounded,
         color: Colors.green,
