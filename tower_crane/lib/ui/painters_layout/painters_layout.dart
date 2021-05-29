@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
 import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
+import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
 import '../responsive_size.dart';
@@ -17,9 +18,17 @@ class PaintersLayout extends StatefulWidget {
 class _PaintersLayoutState extends State<PaintersLayout> {
   Timer timer;
   double radians = 0.0;
-  Offset tappedPosition = Offset(0,0);
+  Offset tappedPosition = Offset(0, 0);
+  StreamSubscription streamSubscription;
+  bool isSimulated = WorldState.isSimulated;
+
   @override
   void initState() {
+    streamSubscription = SimulListener.simulationStream.listen((event) {
+      setState(() {
+        isSimulated = event;
+      });
+    });
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
       setState(() {
         radians += 0.01;
@@ -58,7 +67,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
             height: 357.h,
             width: 1536.w,
             child: GestureDetector(
-              onTapDown: (details) {
+              onTapDown: isSimulated ? null : (details) {
                 var coord = checkBoxCoord(Offset(details.globalPosition.dx, details.globalPosition.dy));
                 if(WorldState.boxPlaces[coord] < 4){
                   WorldState.currentTarget = coord;
@@ -84,12 +93,19 @@ class _PaintersLayoutState extends State<PaintersLayout> {
     );
   }
 
-  int checkBoxCoord(Offset tappedPosition){
-    for (int i = 0; i < 12; i++){
-      var x = WorldState.shipX - (ContainerBoxDimensions.length * 3) + ContainerBoxDimensions.length * (i % 6);
-      var y = WorldState.shipY - ContainerBoxDimensions.width + ContainerBoxDimensions.width * (i ~/ 6);
-      var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
-      if(rect.contains(tappedPosition)){
+  int checkBoxCoord(Offset tappedPosition) {
+    for (int i = 0; i < 12; i++) {
+      var x = WorldState.shipX -
+          (ContainerBoxDimensions.length * 3) +
+          ContainerBoxDimensions.length * (i % 6);
+      var y = WorldState.shipY -
+          ContainerBoxDimensions.width +
+          ContainerBoxDimensions.width * (i ~/ 6);
+      var rect = Rect.fromPoints(
+          Offset(x.w, y.h),
+          Offset((x + ContainerBoxDimensions.length).w,
+              (y + ContainerBoxDimensions.width).h));
+      if (rect.contains(tappedPosition)) {
         return i;
       }
     }

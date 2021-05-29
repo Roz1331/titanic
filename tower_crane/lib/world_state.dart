@@ -8,6 +8,8 @@ class WorldState {
   static double windSpeed = 0;
   static int ropeLength = 40;
 
+  static bool isSimulated = false;
+
   static double ropeEndX;
   static double ropeEndY;
   static double ropeEndZ;
@@ -17,3 +19,4 @@ class WorldState {
 
   static double carriageX = 585.0, carriageY = 200.0, carriageZ = CarriageDimensions.height.toDouble();
 
+}
