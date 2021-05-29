@@ -1,13 +1,22 @@
 import 'package:tower_crane/stupid_constants.dart';
 
-class WorldState{
+class WorldState {
   static double shipX = 585.0, shipY = 200.0, shipZ = 278.0;
   static double waveZ = 468.0;
   static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
   static double windDirection = 0;
   static double windSpeed = 0;
   static int ropeLength = 40;
-  static var boxPlaces = [1,0,0,0,2,0,0,0,0,0,1,0];
-  static var target = 0;
+
   static bool isSimulated = false;
+
+  static double ropeEndX;
+  static double ropeEndY;
+  static double ropeEndZ;
+
+  static var boxPlaces = [1, 4, 0, 4, 2, 0, 0, 0, 0, 4, 1, 3];
+  static int currentTarget = 0;
+
+  static double carriageX = 585.0, carriageY = 200.0, carriageZ = CarriageDimensions.height.toDouble();
+
 }

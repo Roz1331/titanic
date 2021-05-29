@@ -79,19 +79,29 @@ class FieldPainter extends CustomPainter{
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
 
-      if(i == WorldState.target){
+      if(i == WorldState.currentTarget){
+        WorldState.carriageX = rect.center.dx.antiw;
+        WorldState.carriageY = rect.center.dy.antih;
         Path cross = Path();
         Paint crossPainter = Paint()
           ..color = Colors.black
           ..style = PaintingStyle.stroke
           ..strokeWidth = 3;
-        cross.moveTo((rect.center.dx - 15), (rect.center.dy - 15));
-        cross.lineTo((rect.center.dx + 15), (rect.center.dy + 15));
-        cross.moveTo((rect.center.dx - 15), (rect.center.dy + 15));
-        cross.lineTo((rect.center.dx + 15), (rect.center.dy - 15));
+        cross.moveTo((rect.topLeft.dx), (rect.topLeft.dy));
+        cross.lineTo((rect.bottomRight.dx), (rect.bottomRight.dy));
+        cross.moveTo((rect.bottomLeft.dx), (rect.bottomLeft.dy));
+        cross.lineTo((rect.topRight.dx), (rect.topRight.dy));
         canvas.drawPath(cross, crossPainter);
       }
     }
+
+
+    Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, (WorldState.carriageY - CarriageDimensions.width/2).h,
+        CarriageDimensions.length.w, CarriageDimensions.width.h);
+
+    Paint carriagePainter = Paint()..color = Color(0xFF009F30);
+
+    canvas.drawRect(carriage, carriagePainter);
   }
 
   @override

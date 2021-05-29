@@ -68,20 +68,18 @@ class _PaintersLayoutState extends State<PaintersLayout> {
             width: 1536.w,
             child: GestureDetector(
               onTapDown: isSimulated ? null : (details) {
+                var coord = checkBoxCoord(Offset(details.globalPosition.dx, details.globalPosition.dy));
+                if(WorldState.boxPlaces[coord] < 4){
+                  WorldState.currentTarget = coord;
+                }
                 setState(() {
-                  tappedPosition = Offset(
-                      details.globalPosition.dx, details.globalPosition.dy);
-                  WorldState.target = checkBoxCoord(Offset(
-                      details.globalPosition.dx, details.globalPosition.dy));
+                  tappedPosition = Offset(details.globalPosition.dx, details.globalPosition.dy);
                 });
               },
               child: CustomPaint(
                 painter: ShipTopPainter(tappedPosition),
               ),
             ),
-          ),
-          Divider(
-            thickness: 2,
           ),
           Container(
             height: 357.h,
