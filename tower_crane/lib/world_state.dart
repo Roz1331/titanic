@@ -9,4 +9,5 @@ class WorldState{
   static int ropeLength = 40;
   static var boxPlaces = [1,0,0,0,2,0,0,0,0,0,1,0];
   static var target = 0;
+  static bool isSimulated = false;
 }

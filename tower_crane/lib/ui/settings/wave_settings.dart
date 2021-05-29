@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tower_crane/ui/settings/simul_listener.dart';
 
 import '../../stupid_constants.dart';
 import '../../world_state.dart';
@@ -12,6 +13,17 @@ class WaveSettings extends StatefulWidget {
 }
 
 class _WaveSettingsState extends State<WaveSettings> {
+  StreamSubscription streamSubscription;
+  bool isSimulated = WorldState.isSimulated;
+  @override
+  void initState() {
+    streamSubscription = SimulListener.simulationStream.listen((event) {
+      setState(() {
+        isSimulated = event;
+      });
+    });
+    super.initState();
+  }
   int selectedTile = 0;
 
   setSelectedRadioTile(dynamic val) {
@@ -43,21 +55,21 @@ class _WaveSettingsState extends State<WaveSettings> {
             activeColor: Color(0xFF000060),
             value: 0,
             groupValue: selectedTile,
-            onChanged: setSelectedRadioTile,
+            onChanged: isSimulated ? null : setSelectedRadioTile,
             title: Text(WaveFunctionsHelper.functionStrings[0]),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: 1,
             groupValue: selectedTile,
-            onChanged: setSelectedRadioTile,
+            onChanged: isSimulated ? null : setSelectedRadioTile,
             title: Text(WaveFunctionsHelper.functionStrings[1]),
           ),
           RadioListTile(
             activeColor: Color(0xFF000060),
             value: 2,
             groupValue: selectedTile,
-            onChanged: setSelectedRadioTile,
+            onChanged: isSimulated ? null : setSelectedRadioTile,
             title: Text(WaveFunctionsHelper.functionStrings[2]),
           ),
         ],
