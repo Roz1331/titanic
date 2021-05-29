@@ -11,6 +11,6 @@ class WorldState {
   static var boxPlaces = [1,4,0,4,2,0,0,0,0,4,1,3];
   static int currentTarget = 0;
 
-  static double carriageX = 585.0, carriageY = 0.0, carriageZ = CarriageDimensions.height.toDouble();
+  static double carriageX = 585.0, carriageY = 200.0, carriageZ = CarriageDimensions.height.toDouble();
 }
 
