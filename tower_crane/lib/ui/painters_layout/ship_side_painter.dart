@@ -52,20 +52,26 @@ class ShipSidePainter extends CustomPainter {
     canvas.drawPath(ship, shipPainter);
     canvas.drawPath(wave, wavePainter);
 
+
+
     var balkLeftTop = Offset(0, 0);
     var balkRightBottom = Offset(1172.w, 20.h);
     Rect balk = Rect.fromPoints(balkLeftTop, balkRightBottom);
     canvas.drawRect(balk, balkPainter);
 
-    Rect carriage = Rect.fromLTWH(WorldState.carriageX.w, 0,
+
+
+
+    Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, 0,
         CarriageDimensions.length.w, CarriageDimensions.height.h);
 
-    Paint carriagePainter = Paint()..color = Colors.yellow;
+    Paint carriagePainter = Paint()..color = Color(0xFF009F30);
 
     canvas.drawRect(carriage, carriagePainter);
 
-    var leftContPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
 
+
+    var leftContPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
     Paint solidPainter = Paint()
       ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
