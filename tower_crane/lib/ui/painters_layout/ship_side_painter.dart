@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tower_crane/stupid_constants.dart';
 
-
 import '../../world_state.dart';
 import '../responsive_size.dart';
 
 class ShipSidePainter extends CustomPainter {
   double rads;
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint balkPainter = Paint()..color = Colors.black;
@@ -20,7 +20,7 @@ class ShipSidePainter extends CustomPainter {
       ..color = Color(0xFF000060);
 
     var ship = Path();
-    var leftPart = WorldState.shipX - (ShipDimensions.length/2);
+    var leftPart = WorldState.shipX - (ShipDimensions.length / 2);
     var rightPart = leftPart + ShipDimensions.length;
     var bottomPart = WorldState.shipZ + ShipDimensions.height;
     ship.moveTo(leftPart.w, WorldState.shipZ.h);
@@ -32,18 +32,21 @@ class ShipSidePainter extends CustomPainter {
     var wave = Path();
     wave.moveTo(0, WorldState.waveZ.h);
     wave.lineTo(0, (WorldState.waveZ - WaveDimensions.height).h);
-    var firstControlPoint = Offset(283.w, (WorldState.waveZ - WaveDimensions.height + 40).h);
-    var firstEndPoint = Offset(566.w, (WorldState.waveZ - WaveDimensions.height).h);
+    var firstControlPoint =
+        Offset(283.w, (WorldState.waveZ - WaveDimensions.height + 40).h);
+    var firstEndPoint =
+        Offset(566.w, (WorldState.waveZ - WaveDimensions.height).h);
     var secondControlPoint =
-        Offset(889.w, (WorldState.waveZ - WaveDimensions.height - 40).h );
-    var secondEndPoint = Offset(PainterDimensions.width.w, (WorldState.waveZ - WaveDimensions.height).h);
+        Offset(889.w, (WorldState.waveZ - WaveDimensions.height - 40).h);
+    var secondEndPoint = Offset(PainterDimensions.width.w,
+        (WorldState.waveZ - WaveDimensions.height).h);
 
     wave.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
         firstEndPoint.dx, firstEndPoint.dy);
     wave.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
         secondEndPoint.dx, secondEndPoint.dy);
 
-    wave.lineTo(PainterDimensions.width.w, WorldState.waveZ );
+    wave.lineTo(PainterDimensions.width.w, WorldState.waveZ);
     wave.close();
 
     canvas.drawPath(ship, shipPainter);
@@ -54,17 +57,59 @@ class ShipSidePainter extends CustomPainter {
     Rect balk = Rect.fromPoints(balkLeftTop, balkRightBottom);
     canvas.drawRect(balk, balkPainter);
 
-    Rect carriage = Rect.fromLTWH(WorldState.carriageX.w, 0, CarriageDimensions.length.w, CarriageDimensions.height.h);
+    Rect carriage = Rect.fromLTWH(WorldState.carriageX.w, 0,
+        CarriageDimensions.length.w, CarriageDimensions.height.h);
 
     Paint carriagePainter = Paint()..color = Colors.yellow;
 
     canvas.drawRect(carriage, carriagePainter);
+
+    var leftContPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
+
+    Paint solidPainter = Paint()
+      ..style = PaintingStyle.fill
+      ..color = Color(0xFFFFFFFF);
+    Paint strokePainter = Paint()
+      ..strokeWidth = 3.0
+      ..style = PaintingStyle.stroke
+      ..color = Color(0xFF000000);
+
+    for (int i = 0; i < 12; i++) {
+      var x = leftContPart + ContainerBoxDimensions.length * (i % 6);
+      for (int j = 0; j < WorldState.boxPlaces[i]; j++) {
+        var z = WorldState.shipZ - ContainerBoxDimensions.height * j;
+        switch (j+1) {
+          case 0:
+            solidPainter.color = Color(0xFFFFFFFF);
+            break;
+          case 1:
+            solidPainter.color = Color(0xFFFFFF00);
+            break;
+          case 2:
+            solidPainter.color = Color(0xFFFFAA00);
+            break;
+          case 3:
+            solidPainter.color = Color(0xFFFF0000);
+            break;
+          case 4:
+            solidPainter.color = Color(0xFFAA0000);
+            break;
+        }
+        var rect = Rect.fromPoints(
+            Offset(x.w, z.h),
+            Offset((x + ContainerBoxDimensions.length).w,
+                (z - ContainerBoxDimensions.height).h));
+        canvas.drawRect(rect, solidPainter);
+        canvas.drawRect(rect, strokePainter);
+      }
+    }
   }
 
   ShipSidePainter(this.rads);
 
   @override
-  bool shouldRepaint(ShipSidePainter oldDelegate) => oldDelegate.rads != this.rads;
+  bool shouldRepaint(ShipSidePainter oldDelegate) =>
+      oldDelegate.rads != this.rads;
 
   @override
   bool shouldRebuildSemantics(ShipSidePainter oldDelegate) => false;
