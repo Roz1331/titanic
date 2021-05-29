@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
@@ -16,7 +17,7 @@ class PaintersLayout extends StatefulWidget {
 class _PaintersLayoutState extends State<PaintersLayout> {
   Timer timer;
   double radians = 0.0;
-
+  Offset tappedPosition = Offset(0,0);
   @override
   void initState() {
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
@@ -56,8 +57,16 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Container(
             height: 357.h,
             width: 1536.w,
-            child: CustomPaint(
-              painter: ShipTopPainter(),
+            child: GestureDetector(
+              onTapDown: (details) {
+                setState(() {
+                  tappedPosition = Offset(details.globalPosition.dx, details.globalPosition.dy);
+                  WorldState.target = checkBoxCoord(Offset(details.globalPosition.dx, details.globalPosition.dy));
+                });
+              },
+              child: CustomPaint(
+                painter: ShipTopPainter(tappedPosition),
+              ),
             ),
           ),
           Divider(
@@ -73,5 +82,16 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         ],
       ),
     );
+  }
+
+  int checkBoxCoord(Offset tappedPosition){
+    for (int i = 0; i < 12; i++){
+      var x = WorldState.shipX - (ContainerBoxDimensions.length * 3) + ContainerBoxDimensions.length * (i % 6);
+      var y = WorldState.shipY - ContainerBoxDimensions.width + ContainerBoxDimensions.width * (i ~/ 6);
+      var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
+      if(rect.contains(tappedPosition)){
+        return i;
+      }
+    }
   }
 }
