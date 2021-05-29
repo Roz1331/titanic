@@ -32,7 +32,7 @@ class WaveDimensions{
 }
 
 class ContainerBoxDimensions {
-  static int length = 50;
-  static int width = 20;
+  static int length = 120;
+  static int width = 80;
   static int height = 30;
 }
