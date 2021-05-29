@@ -10,6 +10,14 @@ class ResponsiveSize {
     return value * (_width / 1536);
   }
 
+  static double antiwidth(num value) {
+    return 1536 * value /_width;
+  }
+
+  static double antiheight(num value) {
+    return 754 * value /_height;
+  }
+
   static double height(num value) {
     return value * (_height / 754);
   }
@@ -18,4 +26,6 @@ class ResponsiveSize {
 extension ResponsiveOnNum on num {
   double get w => ResponsiveSize.width(this);
   double get h => ResponsiveSize.height(this);
+  double get antiw => ResponsiveSize.antiwidth(this);
+  double get antih => ResponsiveSize.antiheight(this);
 }

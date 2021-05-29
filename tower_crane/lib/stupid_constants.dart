@@ -36,3 +36,9 @@ class ContainerBoxDimensions {
   static int width = 80;
   static int height = 30;
 }
+
+class CarriageDimensions{
+  static int length = 50;
+  static int width = 50;
+  static int height = 30;
+}

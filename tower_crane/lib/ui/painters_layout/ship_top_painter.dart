@@ -5,6 +5,9 @@ import '../responsive_size.dart';
 import 'dart:ui' as ui;
 
 class ShipTopPainter extends CustomPainter {
+  final Offset tappedPosition;
+  ShipTopPainter(this.tappedPosition);
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint seaPainter = Paint()
@@ -33,7 +36,7 @@ class ShipTopPainter extends CustomPainter {
 
     canvas.drawRect(Rect.fromPoints(leftTop, rightBottom), seaPainter);
     canvas.drawPath(ship, painter);
-    FieldPainter().paint(canvas, size);
+    FieldPainter(tappedPosition).paint(canvas, size);
   }
 
   @override
@@ -44,12 +47,19 @@ class ShipTopPainter extends CustomPainter {
 }
 
 class FieldPainter extends CustomPainter{
+  final Offset tappedPosition;
+  FieldPainter(this.tappedPosition);
+  var containerCoords = [];
+
   @override
   void paint(Canvas canvas, Size size) {
-    Paint painter = Paint()
-      ..strokeWidth = 3
-      ..style = PaintingStyle.stroke
+    Paint solidPainter = Paint()
+      ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
+    Paint strokePainter = Paint()
+    ..strokeWidth = 3.0
+      ..style = PaintingStyle.stroke
+      ..color = Color(0xFF000000);
 
     var leftPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
     var topPart = WorldState.shipY - ContainerBoxDimensions.width;
@@ -58,16 +68,34 @@ class FieldPainter extends CustomPainter{
     for (int i = 0; i < 12; i++){
       var x = leftPart + ContainerBoxDimensions.length * (i % 6);
       var y = topPart + ContainerBoxDimensions.width * (i ~/ 6);
-      if(WorldState.boxPlaces[i] > 0) {
-        painter.style = PaintingStyle.fill;
+      switch(WorldState.boxPlaces[i]){
+        case 0: solidPainter.color = Color(0xFFFFFFFF); break;
+        case 1: solidPainter.color = Color(0xFFFFFF00); break;
+        case 2: solidPainter.color = Color(0xFFFFAA00); break;
+        case 3: solidPainter.color = Color(0xFFFF0000); break;
+        case 4: solidPainter.color = Color(0xFFAA0000); break;
       }
-      canvas.drawRect(Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h)), painter);
-      painter.style = PaintingStyle.stroke;
+      var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
+      canvas.drawRect(rect, solidPainter);
+      canvas.drawRect(rect, strokePainter);
+
+      if(i == WorldState.currentTarget){
+        Path cross = Path();
+        Paint crossPainter = Paint()
+          ..color = Colors.black
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 3;
+        cross.moveTo((rect.center.dx - 15), (rect.center.dy - 15));
+        cross.lineTo((rect.center.dx + 15), (rect.center.dy + 15));
+        cross.moveTo((rect.center.dx - 15), (rect.center.dy + 15));
+        cross.lineTo((rect.center.dx + 15), (rect.center.dy - 15));
+        canvas.drawPath(cross, crossPainter);
+      }
     }
   }
 
   @override
-  bool shouldRepaint(ShipTopPainter oldDelegate) => false;
+  bool shouldRepaint(ShipTopPainter oldDelegate) => oldDelegate.tappedPosition != tappedPosition;
 
   @override
   bool shouldRebuildSemantics(ShipTopPainter oldDelegate) => false;
