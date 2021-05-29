@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:tower_crane/physics/point2d.dart';
 import 'package:tower_crane/world_state.dart';
+import 'package:tower_crane/stupid_constants.dart';
 
 double _radianConverter(double degree) {
   return degree * 180 / pi;
@@ -15,29 +16,28 @@ class Physics {
   static int marginTop = 30;
 
   //вернет лист точек конца веревки
-  static List<Point2d> containerMovement() {
+  static void containerMovement() {
     double zCoordTemp =
         WorldState.ropeLength * cos(_radianConverter(WorldState.windSpeed));
     double zCoordinate = marginTop + zCoordTemp;
+    WorldState.ropeEndZ = zCoordinate;
 
     double xCoordTemp = WorldState.ropeLength *
         sin(_radianConverter(WorldState.windSpeed)); // радиус окружности
     double xCoordTemp2 = xCoordTemp *
         sin(_radianConverter(WorldState.windDirection)); // смещение по Х
-    double xCoordinate = WorldState.shipX + xCoordTemp2;
-    Point2d xzPoint = new Point2d(xCoordinate, zCoordinate);
+    double xCoordinate = WorldState.carriageX + xCoordTemp2;
+    WorldState.ropeEndX = xCoordinate;
 
     double yCoordTemp = xCoordTemp; // радиус окружности
     double yCoordTemp2 = yCoordTemp *
         cos(_radianConverter(WorldState.windDirection)); // смещение по Y
-    double yCoordinate = WorldState.shipY + yCoordTemp2;
-    Point2d xyPoint = new Point2d(xCoordinate, yCoordinate);
-
-    return []..add(xzPoint)..add(xyPoint);
+    double yCoordinate = WorldState.carriageY + yCoordTemp2;
+    WorldState.ropeEndY = yCoordinate;
   }
 
   //обнуляет ветер при достижении контейнера
-  static List<Point2d> containerMovementWithBlocks() {
+  static void containerMovementWithBlocks() {
     double windDirection = WorldState.windDirection;
     double windSpeed = WorldState.windSpeed;
     int currentTarget = WorldState.currentTarget;
@@ -110,81 +110,101 @@ class Physics {
 
     switch (sector) {
       case 1:
-        if (map["u"] > WorldState.boxPlaces[currentTarget]) {
+        if (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
+            WorldState.ropeEndZ + ContainerBoxDimensions.height) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 2:
-        if (map["ur"] > WorldState.boxPlaces[currentTarget] ||
-            map["u"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["ur"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 3:
-        if (map["ur"] > WorldState.boxPlaces[currentTarget] ||
-            map["r"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["ur"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["r"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 4:
-        if (map["r"] > WorldState.boxPlaces[currentTarget]) {
+        if (WorldState.shipZ + map["r"] * ContainerBoxDimensions.height <=
+            WorldState.ropeEndZ + ContainerBoxDimensions.height) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 5:
-        if (map["r"] > WorldState.boxPlaces[currentTarget] ||
-            map["dr"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["r"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["dr"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 6:
-        if (map["dr"] > WorldState.boxPlaces[currentTarget] ||
-            map["d"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["dr"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 7:
-        if (map["d"] > WorldState.boxPlaces[currentTarget]) {
+        if (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
+            WorldState.ropeEndZ + ContainerBoxDimensions.height) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 8:
-        if (map["dl"] > WorldState.boxPlaces[currentTarget] ||
-            map["d"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["dl"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 9:
-        if (map["dl"] > WorldState.boxPlaces[currentTarget] ||
-            map["l"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["dl"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["l"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 10:
-        if (map["l"] > WorldState.boxPlaces[currentTarget]) {
+        if (WorldState.shipZ + map["l"] * ContainerBoxDimensions.height <=
+            WorldState.ropeEndZ + ContainerBoxDimensions.height) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 11:
-        if (map["l"] > WorldState.boxPlaces[currentTarget] ||
-            map["ul"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["l"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["ul"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
         break;
       case 12:
-        if (map["ul"] > WorldState.boxPlaces[currentTarget] ||
-            map["u"] > WorldState.boxPlaces[currentTarget]) {
+        if ((WorldState.shipZ + map["ul"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
+            (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
+                WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
           windDirection = 0;
           windSpeed = 0;
         }
@@ -192,8 +212,6 @@ class Physics {
       default:
     }
 
-    //containerMovement();
-
-    return [];
+    containerMovement();
   }
 }

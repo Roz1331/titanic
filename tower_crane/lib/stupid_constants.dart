@@ -3,8 +3,8 @@ import 'dart:math';
 class WaveFunctionsHelper {
   static List<Function(double)> functions = [
     (double x) => sin(x),
-    (double x) => sin(2*x) * cos(x/4),
-    (double x) => pow(cos(x/2),2) * sin(2*x).abs(),
+    (double x) => sin(2 * x) * cos(x / 4),
+    (double x) => pow(cos(x / 2), 2) * sin(2 * x).abs(),
   ];
 
   static List<String> functionStrings = [
@@ -14,19 +14,19 @@ class WaveFunctionsHelper {
   ];
 }
 
-class ShipDimensions{
+class ShipDimensions {
   static int length = 1091;
   static int width = 239;
   static int height = 79;
   static int sternBevel = 80;
 }
 
-class PainterDimensions{
+class PainterDimensions {
   static int width = 1172;
   static int height = 357;
 }
 
-class WaveDimensions{
+class WaveDimensions {
   static int height = 150;
   static int amplitude = 20;
 }
@@ -37,7 +37,7 @@ class ContainerBoxDimensions {
   static int height = 30;
 }
 
-class CarriageDimensions{
+class CarriageDimensions {
   static int length = 50;
   static int width = 50;
   static int height = 30;
