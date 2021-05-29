@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../stupid_constants.dart';
+import '../../world_state.dart';
 import '../responsive_size.dart';
 import 'dart:ui' as ui;
 
@@ -15,12 +17,16 @@ class ShipTopPainter extends CustomPainter {
       ..color = Color(0xFF000060);
 
     var ship = Path();
-    ship.moveTo(41.w, 198.h);
-    ship.lineTo(121.w, 79.h);
-    ship.lineTo(1051.w, 79.h);
-    ship.lineTo(1132.w, 198.h);
-    ship.lineTo(1051.w, 318.h);
-    ship.lineTo(121.w, 318.h);
+    var leftPart = WorldState.shipX - (ShipDimensions.length/2);
+    var rightPart = leftPart + ShipDimensions.length;
+    var topPart = WorldState.shipY - (ShipDimensions.width/2);
+    var bottomPart = WorldState.shipY + (ShipDimensions.width/2);
+    ship.moveTo(leftPart.w, WorldState.shipY.h);
+    ship.lineTo((leftPart + ShipDimensions.sternBevel).w, topPart.h);
+    ship.lineTo((rightPart - ShipDimensions.sternBevel).w, topPart.h);
+    ship.lineTo(rightPart.w, WorldState.shipY.h);
+    ship.lineTo((rightPart - ShipDimensions.sternBevel).w, bottomPart.h);
+    ship.lineTo((leftPart + ShipDimensions.sternBevel).w, bottomPart.h);
 
     var leftTop = Offset(0, 0);
     var rightBottom = Offset(1172.w, 357.h);

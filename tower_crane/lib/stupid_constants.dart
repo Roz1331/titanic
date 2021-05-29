@@ -30,3 +30,9 @@ class WaveDimensions{
   static int height = 150;
   static int amplitude = 20;
 }
+
+class ContainerBoxDimensions {
+  static int length = 50;
+  static int width = 20;
+  static int height = 30;
+}
