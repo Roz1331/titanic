@@ -7,6 +7,8 @@ class WorldState{
   static double windDirection = 0;
   static double windSpeed = 0;
   static int ropeLength = 40;
-  static var boxPlaces = [1,0,0,0,2,0,0,0,0,0,1,0];
-  static var target = 0;
+  static var boxPlaces = [1,4,0,4,2,0,0,0,0,4,1,3];
+  static var currentTarget = 0;
+
+  static double carriageX = 585.0, carriageY = 0.0, carriageZ = CarriageDimensions.height.toDouble();
 }

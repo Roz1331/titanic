@@ -9,6 +9,7 @@ class ShipSidePainter extends CustomPainter {
   double rads;
   @override
   void paint(Canvas canvas, Size size) {
+    Paint balkPainter = Paint()..color = Colors.black;
     Paint wavePainter = Paint()
       ..strokeWidth = 3
       ..style = PaintingStyle.fill
@@ -47,6 +48,17 @@ class ShipSidePainter extends CustomPainter {
 
     canvas.drawPath(ship, shipPainter);
     canvas.drawPath(wave, wavePainter);
+
+    var balkLeftTop = Offset(0, 0);
+    var balkRightBottom = Offset(1172.w, 20.h);
+    Rect balk = Rect.fromPoints(balkLeftTop, balkRightBottom);
+    canvas.drawRect(balk, balkPainter);
+
+    Rect carriage = Rect.fromLTWH(WorldState.carriageX.w, 0, CarriageDimensions.length.w, CarriageDimensions.height.h);
+
+    Paint carriagePainter = Paint()..color = Colors.yellow;
+
+    canvas.drawRect(carriage, carriagePainter);
   }
 
   ShipSidePainter(this.rads);

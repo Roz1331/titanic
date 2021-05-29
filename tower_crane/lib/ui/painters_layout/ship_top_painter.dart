@@ -79,7 +79,7 @@ class FieldPainter extends CustomPainter{
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
 
-      if(i == WorldState.target){
+      if(i == WorldState.currentTarget){
         Path cross = Path();
         Paint crossPainter = Paint()
           ..color = Colors.black
