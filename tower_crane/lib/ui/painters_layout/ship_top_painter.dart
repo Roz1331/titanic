@@ -33,6 +33,37 @@ class ShipTopPainter extends CustomPainter {
 
     canvas.drawRect(Rect.fromPoints(leftTop, rightBottom), seaPainter);
     canvas.drawPath(ship, painter);
+    FieldPainter().paint(canvas, size);
+  }
+
+  @override
+  bool shouldRepaint(ShipTopPainter oldDelegate) => false;
+
+  @override
+  bool shouldRebuildSemantics(ShipTopPainter oldDelegate) => false;
+}
+
+class FieldPainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint painter = Paint()
+      ..strokeWidth = 3
+      ..style = PaintingStyle.stroke
+      ..color = Color(0xFFFFFFFF);
+
+    var leftPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
+    var topPart = WorldState.shipY - ContainerBoxDimensions.width;
+
+    //canvas.drawRect(Rect.fromPoints(Offset(10, 10), Offset(50, 50)), painter);
+    for (int i = 0; i < 12; i++){
+      var x = leftPart + ContainerBoxDimensions.length * (i % 6);
+      var y = topPart + ContainerBoxDimensions.width * (i ~/ 6);
+      if(WorldState.boxPlaces[i] > 0) {
+        painter.style = PaintingStyle.fill;
+      }
+      canvas.drawRect(Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h)), painter);
+      painter.style = PaintingStyle.stroke;
+    }
   }
 
   @override
