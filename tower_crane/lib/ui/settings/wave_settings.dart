@@ -61,6 +61,7 @@ class _WaveSettingsState extends State<WaveSettings> {
         children: [
           Container(
             height: 50.h,
+            width: 250.w,
             child: RadioListTile(
               activeColor: Color(0xFF000060),
               value: 0,
@@ -71,6 +72,7 @@ class _WaveSettingsState extends State<WaveSettings> {
           ),
           Container(
             height: 50.h,
+            width: 250.w,
             child: RadioListTile(
               activeColor: Color(0xFF000060),
               value: 1,
@@ -81,6 +83,7 @@ class _WaveSettingsState extends State<WaveSettings> {
           ),
           Container(
             height: 50.h,
+            width: 250.w,
             child: RadioListTile(
               activeColor: Color(0xFF000060),
               value: 2,

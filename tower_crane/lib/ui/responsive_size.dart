@@ -1,6 +1,6 @@
 class ResponsiveSize {
-  static double _width = 360;
-  static double _height = 740;
+  static double _width = 1536;
+  static double _height = 754;
   static void init({double height, double width}) {
     _width = width;
     _height = height;

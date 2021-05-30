@@ -33,6 +33,7 @@ class _WindSettingsState extends State<WindSettings> {
           ),
           Container(
             height: 40.h,
+            width: 250.w,
             child: Slider(
               divisions: 360,
               label: WorldState.windDirection.toInt().toString(),
@@ -58,6 +59,7 @@ class _WindSettingsState extends State<WindSettings> {
           ),
           Container(
             height: 40.h,
+            width: 250.w,
             child: Slider(
               divisions: 46,
               label: WorldState.windSpeed.toInt().toString(),
