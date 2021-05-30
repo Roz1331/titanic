@@ -60,12 +60,27 @@ class ShipSidePainter extends CustomPainter {
     canvas.drawRect(balk, balkPainter);
 
 
+    Rect containerBox = Rect.fromLTWH((WorldState.containerBoxX - ContainerBoxDimensions.length/2).w, (WorldState.containerBoxZ - ContainerBoxDimensions.height).h,
+        ContainerBoxDimensions.length.w, ContainerBoxDimensions.height.h);
 
+    Paint boxPainter = Paint()..color = Color(0xFF7A009A);
+    Paint strokePainter = Paint()
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke
+      ..color = Color(0xFF000000);
+
+    canvas.drawRect(containerBox, boxPainter);
+    canvas.drawRect(containerBox, strokePainter);
+
+    var rope = Path();
+    rope.moveTo(WorldState.carriageX.w, WorldState.carriageZ.h);
+    rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndZ.h);
+    canvas.drawPath(rope, strokePainter);
 
     Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, 0,
         CarriageDimensions.length.w, CarriageDimensions.height.h);
 
-    Paint carriagePainter = Paint()..color = Color(0xFF009F30);
+    Paint carriagePainter = Paint()..color = Color(0xFF0CBB95);
 
     canvas.drawRect(carriage, carriagePainter);
 
@@ -75,10 +90,6 @@ class ShipSidePainter extends CustomPainter {
     Paint solidPainter = Paint()
       ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
-    Paint strokePainter = Paint()
-      ..strokeWidth = 3.0
-      ..style = PaintingStyle.stroke
-      ..color = Color(0xFF000000);
 
     for (int i = 0; i < 12; i++) {
       var x = leftContPart + ContainerBoxDimensions.length * (i % 6);

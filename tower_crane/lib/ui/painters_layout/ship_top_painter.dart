@@ -57,7 +57,7 @@ class FieldPainter extends CustomPainter{
       ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
     Paint strokePainter = Paint()
-    ..strokeWidth = 3.0
+    ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke
       ..color = Color(0xFF000000);
 
@@ -78,10 +78,9 @@ class FieldPainter extends CustomPainter{
       var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
-
+      print("${WorldState.currentTarget}");
       if(i == WorldState.currentTarget){
-        WorldState.carriageX = rect.center.dx.antiw;
-        WorldState.carriageY = rect.center.dy.antih;
+
         Path cross = Path();
         Paint crossPainter = Paint()
           ..color = Colors.black
@@ -95,11 +94,24 @@ class FieldPainter extends CustomPainter{
       }
     }
 
+    Rect containerBox = Rect.fromLTWH((WorldState.containerBoxX - ContainerBoxDimensions.length/2).w, (WorldState.containerBoxY - ContainerBoxDimensions.width/2).h,
+        ContainerBoxDimensions.length.w, ContainerBoxDimensions.width.h);
+
+    Paint boxPainter = Paint()..color = Color(0xFF7A009A);
+
+    canvas.drawRect(containerBox, boxPainter);
+    canvas.drawRect(containerBox, strokePainter);
+
+    var rope = Path();
+    rope.moveTo(WorldState.carriageX.w, WorldState.carriageY.h);
+    rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndY.h);
+    canvas.drawPath(rope, strokePainter);
+
 
     Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, (WorldState.carriageY - CarriageDimensions.width/2).h,
         CarriageDimensions.length.w, CarriageDimensions.width.h);
 
-    Paint carriagePainter = Paint()..color = Color(0xFF009F30);
+    Paint carriagePainter = Paint()..color = Color(0xFF0CBB95);
 
     canvas.drawRect(carriage, carriagePainter);
   }
