@@ -32,18 +32,21 @@ class _WindSettingsState extends State<WindSettings> {
               fontSize: 14.h,
             ),
           ),
-          Slider(
-            divisions: 360,
-            label: directionValue.toInt().toString(),
-            activeColor: Color(0xFF000060),
-            min: 0,
-            max: 359,
-            value: directionValue,
-            onChanged: (value) {
-              setState(() {
-                directionValue = value;
-              });
-            },
+          Container(
+            height: 40.h,
+            child: Slider(
+              divisions: 360,
+              label: directionValue.toInt().toString(),
+              activeColor: Color(0xFF000060),
+              min: 0,
+              max: 359,
+              value: directionValue,
+              onChanged: (value) {
+                setState(() {
+                  directionValue = value;
+                });
+              },
+            ),
           ),
           Spacer(
             flex: 5,
@@ -54,18 +57,21 @@ class _WindSettingsState extends State<WindSettings> {
               fontSize: 14.h,
             ),
           ),
-          Slider(
-            divisions: 46,
-            label: speedValue.toInt().toString(),
-            activeColor: Color(0xFF000060),
-            min: 0,
-            max: 45,
-            value: speedValue,
-            onChanged: (value) {
-              setState(() {
-                speedValue = value;
-              });
-            },
+          Container(
+            height: 40.h,
+            child: Slider(
+              divisions: 46,
+              label: speedValue.toInt().toString(),
+              activeColor: Color(0xFF000060),
+              min: 0,
+              max: 45,
+              value: speedValue,
+              onChanged: (value) {
+                setState(() {
+                  speedValue = value;
+                });
+              },
+            ),
           ),
         ],
       ),
