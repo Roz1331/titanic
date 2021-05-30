@@ -26,13 +26,14 @@ class Physics {
     double xCoordTemp2 = xCoordTemp *
         sin(_radianConverter(WorldState.windDirection)); // смещение по Х
     double xCoordinate = WorldState.carriageX + xCoordTemp2;
-    WorldState.ropeEndX = xCoordinate;
+    //WorldState.ropeEndX = xCoordinate;
 
     double yCoordTemp = xCoordTemp; // радиус окружности
     double yCoordTemp2 = yCoordTemp *
         cos(_radianConverter(WorldState.windDirection)); // смещение по Y
     double yCoordinate = WorldState.carriageY + yCoordTemp2;
-    WorldState.ropeEndY = yCoordinate;
+    //WorldState.ropeEndY = yCoordinate;
+    WorldState.setRopeCoords(xCoordinate,yCoordinate,WorldState.ropeEndZ);
   }
 
   //обнуляет ветер при достижении контейнера

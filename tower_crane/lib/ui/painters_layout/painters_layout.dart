@@ -116,8 +116,9 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         if (WorldState.boxPlaces[i] < 4) {
           WorldState.carriageX = rect.center.dx.antiw;
           WorldState.carriageY = rect.center.dy.antih;
-          WorldState.ropeEndX = WorldState.carriageX;
-          WorldState.ropeEndY = WorldState.carriageY;
+          //WorldState.ropeEndX = WorldState.carriageX;
+          //WorldState.ropeEndY = WorldState.carriageY;
+          WorldState.setRopeCoords(WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
           WorldState.containerBoxX = WorldState.carriageX;
           WorldState.containerBoxY = WorldState.carriageY;
           return i;
