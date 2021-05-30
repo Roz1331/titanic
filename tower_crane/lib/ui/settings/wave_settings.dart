@@ -17,7 +17,7 @@ class _WaveSettingsState extends State<WaveSettings> {
   bool isSimulated = WorldState.isSimulated;
   @override
   void initState() {
-    streamSubscription = SimulListener.simulationStream.listen((event) {
+    streamSubscription = SimulationListener.simulationStream.listen((event) {
       setState(() {
         isSimulated = event;
       });
