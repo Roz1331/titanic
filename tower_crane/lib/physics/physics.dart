@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:tower_crane/physics/point2d.dart';
 import 'package:tower_crane/world_state.dart';
 import 'package:tower_crane/stupid_constants.dart';
 
@@ -41,22 +40,6 @@ class Physics {
     double windDirection = WorldState.windDirection;
     double windSpeed = WorldState.windSpeed;
     int currentTarget = WorldState.currentTarget;
-
-    // if (_belongToInterval(windDirection, 0, 26.5) ||
-    //     _belongToInterval(windDirection, 333.5, 360)) {
-    //   if (currentTarget > 6 &&
-    //       (WorldState.boxPlaces[currentTarget - 7] >
-    //           WorldState.boxPlaces[currentTarget]))
-    //     WorldState.windDirection = 0;
-    // } else if (_belongToInterval(windDirection, 26.5, 56)) {
-    //   if (currentTarget > 6 &&
-    //       (WorldState.boxPlaces[currentTarget - 7] >
-    //               WorldState.boxPlaces[currentTarget] ||
-    //           (currentTarget != 13 &&
-    //               WorldState.boxPlaces[currentTarget - 6] >
-    //                   WorldState.boxPlaces[currentTarget])))
-    //     WorldState.windDirection = 0;
-    // }
 
     int sector = 0;
 
