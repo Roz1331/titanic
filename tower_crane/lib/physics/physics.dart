@@ -7,7 +7,7 @@ double _radianConverter(double degree) {
   return degree * pi / 180;
 }
 
-bool _belongToInterval(double x, double left, double right) {
+bool belongToInterval(double x, double left, double right) {
   return x >= left && x < right;
 }
 
@@ -44,19 +44,19 @@ class Physics {
 
     int sector = 0;
 
-    if (_belongToInterval(windDirection, 0, 26.5) ||
-        _belongToInterval(windDirection, 333.5, 360)) sector = 1;
-    if (_belongToInterval(windDirection, 26.5, 56)) sector = 2;
-    if (_belongToInterval(windDirection, 56, 77.5)) sector = 3;
-    if (_belongToInterval(windDirection, 77.5, 102.5)) sector = 4;
-    if (_belongToInterval(windDirection, 102.5, 124)) sector = 5;
-    if (_belongToInterval(windDirection, 124, 153.5)) sector = 6;
-    if (_belongToInterval(windDirection, 153.5, 206.5)) sector = 7;
-    if (_belongToInterval(windDirection, 206.5, 236)) sector = 8;
-    if (_belongToInterval(windDirection, 236, 257.5)) sector = 9;
-    if (_belongToInterval(windDirection, 257.5, 282.5)) sector = 10;
-    if (_belongToInterval(windDirection, 282.5, 304)) sector = 11;
-    if (_belongToInterval(windDirection, 304, 333.5)) sector = 12;
+    if (belongToInterval(windDirection, 0, 26.5) ||
+        belongToInterval(windDirection, 333.5, 360)) sector = 1;
+    if (belongToInterval(windDirection, 26.5, 56)) sector = 2;
+    if (belongToInterval(windDirection, 56, 77.5)) sector = 3;
+    if (belongToInterval(windDirection, 77.5, 102.5)) sector = 4;
+    if (belongToInterval(windDirection, 102.5, 124)) sector = 5;
+    if (belongToInterval(windDirection, 124, 153.5)) sector = 6;
+    if (belongToInterval(windDirection, 153.5, 206.5)) sector = 7;
+    if (belongToInterval(windDirection, 206.5, 236)) sector = 8;
+    if (belongToInterval(windDirection, 236, 257.5)) sector = 9;
+    if (belongToInterval(windDirection, 257.5, 282.5)) sector = 10;
+    if (belongToInterval(windDirection, 282.5, 304)) sector = 11;
+    if (belongToInterval(windDirection, 304, 333.5)) sector = 12;
 
     Map map = Map();
     map["u"] = -1;

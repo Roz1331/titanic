@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:tower_crane/logic.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 
@@ -51,5 +52,8 @@ class WorldState {
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
 
-  static double carriageDownVelocity = 0;
+  static double containerDownVelocity = 0;
+
+  static double containerToShipDistance = 118;
+
 }
