@@ -40,7 +40,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           (WorldState.waveFunction(radians) -
               WorldState.waveFunction(radians - 0.01));
     });
-    checkBoxCoord(Offset(200,112)); // эмулируем нажатие для инициализации
+    checkBoxCoord(Offset(-1,-1)); // эмулируем нажатие для инициализации
     super.initState();
   }
 
@@ -112,7 +112,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Offset(x.w, y.h),
           Offset((x + ContainerBoxDimensions.length).w,
               (y + ContainerBoxDimensions.width).h));
-      if (rect.contains(tappedPosition)) {
+      if (rect.contains(tappedPosition) || tappedPosition == Offset(-1,-1)) {
         if (WorldState.boxPlaces[i] < 4) {
           WorldState.carriageX = rect.center.dx.antiw;
           WorldState.carriageY = rect.center.dy.antih;

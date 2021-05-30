@@ -78,7 +78,7 @@ class FieldPainter extends CustomPainter{
       var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
-      print("${WorldState.currentTarget}");
+
       if(i == WorldState.currentTarget){
 
         Path cross = Path();
