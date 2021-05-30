@@ -2,7 +2,7 @@ import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 
 class WorldState {
-  static double shipX = 585.0, shipY = 200.0, shipZ = 278.0;
+  static double shipX = 585.0, shipY = 200.0, shipZ = 635.0;
   static double waveZ = 468.0;
   static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
   static double windDirection = 0;
@@ -22,8 +22,9 @@ class WorldState {
       carriageY = 200.0,
       carriageZ = CarriageDimensions.height.toDouble();
 
-
-  static double containerBoxX = ropeEndX, containerBoxY = ropeEndY, containerBoxZ = ropeEndZ + ContainerBoxDimensions.height;
+  static double containerBoxX = ropeEndX,
+      containerBoxY = ropeEndY,
+      containerBoxZ = ropeEndZ + ContainerBoxDimensions.height;
 
   static void startSimulation() {
     WorldState.isSimulated = true;
@@ -35,4 +36,5 @@ class WorldState {
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
 
+  static double carriageDownVelocity = 0;
 }

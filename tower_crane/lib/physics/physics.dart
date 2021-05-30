@@ -4,7 +4,7 @@ import 'package:tower_crane/world_state.dart';
 import 'package:tower_crane/stupid_constants.dart';
 
 double _radianConverter(double degree) {
-  return degree * 180 / pi;
+  return degree * pi / 180;
 }
 
 bool _belongToInterval(double x, double left, double right) {
