@@ -15,6 +15,12 @@ class WaveSettings extends StatefulWidget {
 class _WaveSettingsState extends State<WaveSettings> {
   StreamSubscription streamSubscription;
   bool isSimulated = WorldState.isSimulated;
+
+  @override
+  void dispose() {
+    streamSubscription.cancel();
+    super.dispose();
+  }
   @override
   void initState() {
     streamSubscription = SimulationListener.simulationStream.listen((event) {
@@ -24,6 +30,7 @@ class _WaveSettingsState extends State<WaveSettings> {
     });
     super.initState();
   }
+  
 
   int selectedTile = 0;
 

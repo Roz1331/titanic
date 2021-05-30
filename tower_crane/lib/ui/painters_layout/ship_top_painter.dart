@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../stupid_constants.dart';
 import '../../world_state.dart';
 import '../responsive_size.dart';
-import 'dart:ui' as ui;
 
 class ShipTopPainter extends CustomPainter {
   final Offset tappedPosition;
@@ -20,10 +19,10 @@ class ShipTopPainter extends CustomPainter {
       ..color = Color(0xFF000060);
 
     var ship = Path();
-    var leftPart = WorldState.shipX - (ShipDimensions.length/2);
+    var leftPart = WorldState.shipX - (ShipDimensions.length / 2);
     var rightPart = leftPart + ShipDimensions.length;
-    var topPart = WorldState.shipY - (ShipDimensions.width/2);
-    var bottomPart = WorldState.shipY + (ShipDimensions.width/2);
+    var topPart = WorldState.shipY - (ShipDimensions.width / 2);
+    var bottomPart = WorldState.shipY + (ShipDimensions.width / 2);
     ship.moveTo(leftPart.w, WorldState.shipY.h);
     ship.lineTo((leftPart + ShipDimensions.sternBevel).w, topPart.h);
     ship.lineTo((rightPart - ShipDimensions.sternBevel).w, topPart.h);
@@ -46,7 +45,7 @@ class ShipTopPainter extends CustomPainter {
   bool shouldRebuildSemantics(ShipTopPainter oldDelegate) => false;
 }
 
-class FieldPainter extends CustomPainter{
+class FieldPainter extends CustomPainter {
   final Offset tappedPosition;
   FieldPainter(this.tappedPosition);
   var containerCoords = [];
@@ -57,7 +56,7 @@ class FieldPainter extends CustomPainter{
       ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
     Paint strokePainter = Paint()
-    ..strokeWidth = 2.0
+      ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke
       ..color = Color(0xFF000000);
 
@@ -65,22 +64,34 @@ class FieldPainter extends CustomPainter{
     var topPart = WorldState.shipY - ContainerBoxDimensions.width;
 
     //canvas.drawRect(Rect.fromPoints(Offset(10, 10), Offset(50, 50)), painter);
-    for (int i = 0; i < 12; i++){
+    for (int i = 0; i < 12; i++) {
       var x = leftPart + ContainerBoxDimensions.length * (i % 6);
       var y = topPart + ContainerBoxDimensions.width * (i ~/ 6);
-      switch(WorldState.boxPlaces[i]){
-        case 0: solidPainter.color = Color(0xFFFFFFFF); break;
-        case 1: solidPainter.color = Color(0xFFFFFF00); break;
-        case 2: solidPainter.color = Color(0xFFFFAA00); break;
-        case 3: solidPainter.color = Color(0xFFFF0000); break;
-        case 4: solidPainter.color = Color(0xFFAA0000); break;
+      switch (WorldState.boxPlaces[i]) {
+        case 0:
+          solidPainter.color = Color(0xFFFFFFFF);
+          break;
+        case 1:
+          solidPainter.color = Color(0xFFFFFF00);
+          break;
+        case 2:
+          solidPainter.color = Color(0xFFFFAA00);
+          break;
+        case 3:
+          solidPainter.color = Color(0xFFFF0000);
+          break;
+        case 4:
+          solidPainter.color = Color(0xFFAA0000);
+          break;
       }
-      var rect = Rect.fromPoints(Offset(x.w,y.h), Offset((x + ContainerBoxDimensions.length).w, (y + ContainerBoxDimensions.width).h));
+      var rect = Rect.fromPoints(
+          Offset(x.w, y.h),
+          Offset((x + ContainerBoxDimensions.length).w,
+              (y + ContainerBoxDimensions.width).h));
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
 
-      if(i == WorldState.currentTarget){
-
+      if (i == WorldState.currentTarget) {
         Path cross = Path();
         Paint crossPainter = Paint()
           ..color = Colors.black
@@ -94,8 +105,11 @@ class FieldPainter extends CustomPainter{
       }
     }
 
-    Rect containerBox = Rect.fromLTWH((WorldState.containerBoxX - ContainerBoxDimensions.length/2).w, (WorldState.containerBoxY - ContainerBoxDimensions.width/2).h,
-        ContainerBoxDimensions.length.w, ContainerBoxDimensions.width.h);
+    Rect containerBox = Rect.fromLTWH(
+        (WorldState.containerBoxX - ContainerBoxDimensions.length / 2).w,
+        (WorldState.containerBoxY - ContainerBoxDimensions.width / 2).h,
+        ContainerBoxDimensions.length.w,
+        ContainerBoxDimensions.width.h);
 
     Paint boxPainter = Paint()..color = Color(0xFF7A009A);
 
@@ -107,9 +121,11 @@ class FieldPainter extends CustomPainter{
     rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndY.h);
     canvas.drawPath(rope, strokePainter);
 
-
-    Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, (WorldState.carriageY - CarriageDimensions.width/2).h,
-        CarriageDimensions.length.w, CarriageDimensions.width.h);
+    Rect carriage = Rect.fromLTWH(
+        (WorldState.carriageX - CarriageDimensions.length / 2).w,
+        (WorldState.carriageY - CarriageDimensions.width / 2).h,
+        CarriageDimensions.length.w,
+        CarriageDimensions.width.h);
 
     Paint carriagePainter = Paint()..color = Color(0xFF0CBB95);
 
@@ -117,7 +133,8 @@ class FieldPainter extends CustomPainter{
   }
 
   @override
-  bool shouldRepaint(ShipTopPainter oldDelegate) => oldDelegate.tappedPosition != tappedPosition;
+  bool shouldRepaint(ShipTopPainter oldDelegate) =>
+      oldDelegate.tappedPosition != tappedPosition;
 
   @override
   bool shouldRebuildSemantics(ShipTopPainter oldDelegate) => false;

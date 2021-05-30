@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
-import 'package:tower_crane/ui/settings/wave_settings.dart';
 import 'package:tower_crane/world_state.dart';
 import '../responsive_size.dart';
 
@@ -14,6 +12,13 @@ class StartSimulationButton extends StatefulWidget {
 class _StartSimulationButtonState extends State<StartSimulationButton> {
   StreamSubscription streamSubscription;
   bool isSimulated = WorldState.isSimulated;
+
+  @override
+  void dispose() {
+    streamSubscription.cancel();
+    super.dispose();
+  }
+
   @override
   void initState() {
     streamSubscription = SimulationListener.simulationStream.listen((event) {
@@ -23,6 +28,7 @@ class _StartSimulationButtonState extends State<StartSimulationButton> {
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
@@ -36,9 +42,7 @@ class _StartSimulationButtonState extends State<StartSimulationButton> {
               : Color(0xFF000060),
         ),
       ),
-      onPressed: isSimulated
-          ? null
-          : WorldState.startSimulation,
+      onPressed: isSimulated ? null : WorldState.startSimulation,
       icon: Icon(
         Icons.play_arrow_rounded,
         color: Colors.green,

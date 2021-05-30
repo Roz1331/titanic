@@ -24,6 +24,13 @@ class _PaintersLayoutState extends State<PaintersLayout> {
   bool isSimulated = WorldState.isSimulated;
 
   @override
+  void dispose() {
+    streamSubscription.cancel();
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     streamSubscription = SimulationListener.simulationStream.listen((event) {
       setState(() {
@@ -42,14 +49,8 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           (WorldState.waveFunction(radians) -
               WorldState.waveFunction(radians - 0.01));
     });
-    checkBoxCoord(Offset(-1,-1)); // эмулируем нажатие для инициализации
+    checkBoxCoord(Offset(-1, -1)); // эмулируем нажатие для инициализации
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
   }
 
   @override
@@ -114,17 +115,18 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Offset(x.w, y.h),
           Offset((x + ContainerBoxDimensions.length).w,
               (y + ContainerBoxDimensions.width).h));
-      if (rect.contains(tappedPosition) || tappedPosition == Offset(-1,-1)) {
+      if (rect.contains(tappedPosition) || tappedPosition == Offset(-1, -1)) {
         if (WorldState.boxPlaces[i] < 4) {
           WorldState.carriageX = rect.center.dx.antiw;
           WorldState.carriageY = rect.center.dy.antih;
           //WorldState.ropeEndX = WorldState.carriageX;
           //WorldState.ropeEndY = WorldState.carriageY;
-          WorldState.setRopeCoords(WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
+          WorldState.setRopeCoords(
+              WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
           WorldState.containerBoxX = WorldState.carriageX;
           WorldState.containerBoxY = WorldState.carriageY;
           return i;
-        }else{
+        } else {
           return -1;
         }
       }
