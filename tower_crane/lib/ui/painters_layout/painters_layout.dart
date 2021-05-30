@@ -8,6 +8,7 @@ import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
+import '../../physics/physics.dart';
 import '../responsive_size.dart';
 
 class PaintersLayout extends StatefulWidget {
@@ -32,6 +33,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
       setState(() {
         radians += 0.01;
+        Physics.containerMovement();
       });
       WorldState.shipZ += WaveDimensions.amplitude *
           (WorldState.waveFunction(radians) -

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../physics/physics.dart';
+import '../../world_state.dart';
 import '../responsive_size.dart';
 
 class WindSettings extends StatefulWidget {
@@ -7,8 +9,6 @@ class WindSettings extends StatefulWidget {
 }
 
 class _WindSettingsState extends State<WindSettings> {
-  double directionValue = 0;
-  double speedValue = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,14 +36,14 @@ class _WindSettingsState extends State<WindSettings> {
             height: 40.h,
             child: Slider(
               divisions: 360,
-              label: directionValue.toInt().toString(),
+              label: WorldState.windDirection.toInt().toString(),
               activeColor: Color(0xFF000060),
               min: 0,
               max: 359,
-              value: directionValue,
+              value: WorldState.windDirection,
               onChanged: (value) {
                 setState(() {
-                  directionValue = value;
+                  WorldState.windDirection = value;
                 });
               },
             ),
@@ -61,14 +61,14 @@ class _WindSettingsState extends State<WindSettings> {
             height: 40.h,
             child: Slider(
               divisions: 46,
-              label: speedValue.toInt().toString(),
+              label: WorldState.windSpeed.toInt().toString(),
               activeColor: Color(0xFF000060),
               min: 0,
               max: 45,
-              value: speedValue,
+              value: WorldState.windSpeed,
               onChanged: (value) {
                 setState(() {
-                  speedValue = value;
+                  WorldState.windSpeed = value;
                 });
               },
             ),
