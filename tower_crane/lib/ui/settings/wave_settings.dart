@@ -17,13 +17,14 @@ class _WaveSettingsState extends State<WaveSettings> {
   bool isSimulated = WorldState.isSimulated;
   @override
   void initState() {
-    streamSubscription = SimulListener.simulationStream.listen((event) {
+    streamSubscription = SimulationListener.simulationStream.listen((event) {
       setState(() {
         isSimulated = event;
       });
     });
     super.initState();
   }
+
   int selectedTile = 0;
 
   setSelectedRadioTile(dynamic val) {
@@ -49,28 +50,37 @@ class _WaveSettingsState extends State<WaveSettings> {
       height: 230.h,
       width: 283.w,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          RadioListTile(
-            //selected: true,
-            activeColor: Color(0xFF000060),
-            value: 0,
-            groupValue: selectedTile,
-            onChanged: isSimulated ? null : setSelectedRadioTile,
-            title: Text(WaveFunctionsHelper.functionStrings[0]),
+          Container(
+            height: 50.h,
+            child: RadioListTile(
+              activeColor: Color(0xFF000060),
+              value: 0,
+              groupValue: selectedTile,
+              onChanged: isSimulated ? null : setSelectedRadioTile,
+              title: Text(WaveFunctionsHelper.functionStrings[0]),
+            ),
           ),
-          RadioListTile(
-            activeColor: Color(0xFF000060),
-            value: 1,
-            groupValue: selectedTile,
-            onChanged: isSimulated ? null : setSelectedRadioTile,
-            title: Text(WaveFunctionsHelper.functionStrings[1]),
+          Container(
+            height: 50.h,
+            child: RadioListTile(
+              activeColor: Color(0xFF000060),
+              value: 1,
+              groupValue: selectedTile,
+              onChanged: isSimulated ? null : setSelectedRadioTile,
+              title: Text(WaveFunctionsHelper.functionStrings[1]),
+            ),
           ),
-          RadioListTile(
-            activeColor: Color(0xFF000060),
-            value: 2,
-            groupValue: selectedTile,
-            onChanged: isSimulated ? null : setSelectedRadioTile,
-            title: Text(WaveFunctionsHelper.functionStrings[2]),
+          Container(
+            height: 50.h,
+            child: RadioListTile(
+              activeColor: Color(0xFF000060),
+              value: 2,
+              groupValue: selectedTile,
+              onChanged: isSimulated ? null : setSelectedRadioTile,
+              title: Text(WaveFunctionsHelper.functionStrings[2]),
+            ),
           ),
         ],
       ),
