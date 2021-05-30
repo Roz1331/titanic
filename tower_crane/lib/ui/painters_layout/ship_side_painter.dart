@@ -52,16 +52,16 @@ class ShipSidePainter extends CustomPainter {
     canvas.drawPath(ship, shipPainter);
     canvas.drawPath(wave, wavePainter);
 
-
-
     var balkLeftTop = Offset(0, 0);
     var balkRightBottom = Offset(1172.w, 20.h);
     Rect balk = Rect.fromPoints(balkLeftTop, balkRightBottom);
     canvas.drawRect(balk, balkPainter);
 
-
-    Rect containerBox = Rect.fromLTWH((WorldState.containerBoxX - ContainerBoxDimensions.length/2).w, (WorldState.containerBoxZ - ContainerBoxDimensions.height).h,
-        ContainerBoxDimensions.length.w, ContainerBoxDimensions.height.h);
+    Rect containerBox = Rect.fromLTWH(
+        (WorldState.containerBoxX - ContainerBoxDimensions.length / 2).w,
+        (WorldState.containerBoxZ - ContainerBoxDimensions.height).h,
+        ContainerBoxDimensions.length.w,
+        ContainerBoxDimensions.height.h);
 
     Paint boxPainter = Paint()..color = Color(0xFF7A009A);
     Paint strokePainter = Paint()
@@ -77,14 +77,16 @@ class ShipSidePainter extends CustomPainter {
     rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndZ.h);
     canvas.drawPath(rope, strokePainter);
 
-    Rect carriage = Rect.fromLTWH((WorldState.carriageX - CarriageDimensions.length/2).w, 0,
-        CarriageDimensions.length.w, CarriageDimensions.height.h);
+    Rect carriage = Rect.fromLTWH(
+        (WorldState.carriageX - CarriageDimensions.length / 2).w,
+        0,
+        CarriageDimensions.length.w,
+        CarriageDimensions.height.h);
+    
 
     Paint carriagePainter = Paint()..color = Color(0xFF0CBB95);
 
     canvas.drawRect(carriage, carriagePainter);
-
-
 
     var leftContPart = WorldState.shipX - (ContainerBoxDimensions.length * 3);
     Paint solidPainter = Paint()
@@ -95,7 +97,7 @@ class ShipSidePainter extends CustomPainter {
       var x = leftContPart + ContainerBoxDimensions.length * (i % 6);
       for (int j = 0; j < WorldState.boxPlaces[i]; j++) {
         var z = WorldState.shipZ - ContainerBoxDimensions.height * j;
-        switch (j+1) {
+        switch (j + 1) {
           case 0:
             solidPainter.color = Color(0xFFFFFFFF);
             break;

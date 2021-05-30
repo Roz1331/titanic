@@ -55,6 +55,8 @@ class _PaintersLayoutState extends State<PaintersLayout> {
 
   @override
   Widget build(BuildContext context) {
+    var width = 1172.w;
+    print("Painters "+ width.toString());
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -64,7 +66,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           ),
         ),
       ),
-      width: 1172.w,
+      width: width, 
       child: Column(
         children: [
           Container(

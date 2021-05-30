@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 
@@ -28,6 +30,7 @@ class WorldState {
   }
 
   static var boxPlaces = [1, 4, 0, 4, 2, 0, 0, 0, 0, 4, 1, 3];
+  static List<Offset> targetCenters = [];
   static int currentTarget = 0;
 
   static double carriageX = 585.0,

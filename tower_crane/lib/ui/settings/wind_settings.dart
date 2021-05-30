@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 import '../../world_state.dart';
 import '../responsive_size.dart';
 
@@ -22,7 +23,7 @@ class _WindSettingsState extends State<WindSettings> {
         ),
       ),
       height: 200.h,
-      width: 283.w,
+      width: 270.w,
       child: Column(
         children: [
           Text(
@@ -33,15 +34,34 @@ class _WindSettingsState extends State<WindSettings> {
           ),
           Container(
             height: 40.h,
-            width: 250.w,
-            child: Slider(
-              divisions: 360,
-              label: WorldState.windDirection.toInt().toString(),
-              activeColor: Color(0xFF000060),
+            width: 240.w,
+            child: FlutterSlider(
+              trackBar: FlutterSliderTrackBar(
+                activeTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Color(0xFF000060),
+                ),
+                inactiveTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              selectByTap: false,
+              tooltip: FlutterSliderTooltip(
+                textStyle: TextStyle(
+                  fontSize: 17,
+                  color: Colors.white,
+                ),
+                boxStyle: FlutterSliderTooltipBox(
+                  decoration: BoxDecoration(
+                    color: Color(0xFF000060),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              values: [WorldState.windDirection],
               min: 0,
               max: 359,
-              value: WorldState.windDirection,
-              onChanged: (value) {
+              onDragging: (_, value, __) {
                 setState(() {
                   WorldState.windDirection = value;
                 });
@@ -59,15 +79,31 @@ class _WindSettingsState extends State<WindSettings> {
           ),
           Container(
             height: 40.h,
-            width: 250.w,
-            child: Slider(
-              divisions: 46,
-              label: WorldState.windSpeed.toInt().toString(),
-              activeColor: Color(0xFF000060),
+            width: 240.w,
+            child: FlutterSlider(
+              trackBar: FlutterSliderTrackBar(
+                activeTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Color(0xFF000060),
+                ),
+                inactiveTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              selectByTap: false,
+              tooltip: FlutterSliderTooltip(
+                textStyle: TextStyle(fontSize: 17, color: Colors.white),
+                boxStyle: FlutterSliderTooltipBox(
+                  decoration: BoxDecoration(
+                    color: Color(0xFF000060),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              values: [WorldState.windSpeed],
               min: 0,
               max: 45,
-              value: WorldState.windSpeed,
-              onChanged: (value) {
+              onDragging: (_, value, __) {
                 setState(() {
                   WorldState.windSpeed = value;
                 });

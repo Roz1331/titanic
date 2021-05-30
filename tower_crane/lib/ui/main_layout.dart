@@ -7,18 +7,13 @@ import 'responsive_size.dart';
 class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Row(
+    print(MediaQuery.of(context).size.width);
+    return Scaffold(
+      body: Container(
+        child: Row(
           children: [
             PaintersLayout(),
-            Container(
-              padding: EdgeInsets.only(
-                top: 79.h,
-              ),
-              width: 364.w,
-              child: Settings(),
-            )
+            Settings()
           ],
         ),
       ),

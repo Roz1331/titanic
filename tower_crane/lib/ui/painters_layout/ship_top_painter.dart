@@ -88,6 +88,7 @@ class FieldPainter extends CustomPainter {
           Offset(x.w, y.h),
           Offset((x + ContainerBoxDimensions.length).w,
               (y + ContainerBoxDimensions.width).h));
+      WorldState.targetCenters.add(rect.center);
       canvas.drawRect(rect, solidPainter);
       canvas.drawRect(rect, strokePainter);
 

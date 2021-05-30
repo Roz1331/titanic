@@ -43,6 +43,8 @@ class _WaveSettingsState extends State<WaveSettings> {
 
   @override
   Widget build(BuildContext context) {
+    var width = 270.w;
+    print("Wave " + width.toString());
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 20.h,
@@ -55,7 +57,7 @@ class _WaveSettingsState extends State<WaveSettings> {
         ),
       ),
       height: 230.h,
-      width: 283.w,
+      width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

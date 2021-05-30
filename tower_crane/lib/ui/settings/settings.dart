@@ -8,22 +8,30 @@ import '../responsive_size.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        WindSettings(),
-        SizedBox(
-          height: 30.h,
-        ),
-        WaveSettings(),
-        SizedBox(
-          height: 30.h,
-        ),
-        StartSimulationButton(),
-        SizedBox(
-          height: 30.h,
-        ),
-        MusicButton(),
-      ],
+    var width = 364.w;
+    print("Settings " + width.toString());
+    return Container(
+      padding: EdgeInsets.only(
+        top: 79.h,
+      ),
+      width: width,
+      child: Column(
+        children: [
+          WindSettings(),
+          SizedBox(
+            height: 30.h,
+          ),
+          WaveSettings(),
+          SizedBox(
+            height: 30.h,
+          ),
+          StartSimulationButton(),
+          SizedBox(
+            height: 30.h,
+          ),
+          MusicButton(),
+        ],
+      ),
     );
   }
 }
