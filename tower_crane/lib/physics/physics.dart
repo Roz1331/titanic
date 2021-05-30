@@ -7,7 +7,7 @@ double _radianConverter(double degree) {
   return degree * pi / 180;
 }
 
-bool _belongToInterval(double x, double left, double right) {
+bool belongToInterval(double x, double left, double right) {
   return x >= left && x < right;
 }
 
