@@ -40,6 +40,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           (WorldState.waveFunction(radians) -
               WorldState.waveFunction(radians - 0.01));
     });
+    checkBoxCoord(Offset(200,112)); // эмулируем нажатие для инициализации
     super.initState();
   }
 
@@ -67,15 +68,20 @@ class _PaintersLayoutState extends State<PaintersLayout> {
             height: 357.h,
             width: 1536.w,
             child: GestureDetector(
-              onTapDown: isSimulated ? null : (details) {
-                var coord = checkBoxCoord(Offset(details.globalPosition.dx, details.globalPosition.dy));
-                if(WorldState.boxPlaces[coord] < 4){
-                  WorldState.currentTarget = coord;
-                }
-                setState(() {
-                  tappedPosition = Offset(details.globalPosition.dx, details.globalPosition.dy);
-                });
-              },
+              onTapDown: isSimulated
+                  ? null
+                  : (details) {
+                      var coord = checkBoxCoord(Offset(
+                          details.globalPosition.dx,
+                          details.globalPosition.dy));
+                      if (coord != -1) {
+                        WorldState.currentTarget = coord;
+                      }
+                      setState(() {
+                        tappedPosition = Offset(details.globalPosition.dx,
+                            details.globalPosition.dy);
+                      });
+                    },
               child: CustomPaint(
                 painter: ShipTopPainter(tappedPosition),
               ),
@@ -94,6 +100,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
   }
 
   int checkBoxCoord(Offset tappedPosition) {
+    print("$tappedPosition");
     for (int i = 0; i < 12; i++) {
       var x = WorldState.shipX -
           (ContainerBoxDimensions.length * 3) +
@@ -106,7 +113,17 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Offset((x + ContainerBoxDimensions.length).w,
               (y + ContainerBoxDimensions.width).h));
       if (rect.contains(tappedPosition)) {
-        return i;
+        if (WorldState.boxPlaces[i] < 4) {
+          WorldState.carriageX = rect.center.dx.antiw;
+          WorldState.carriageY = rect.center.dy.antih;
+          WorldState.ropeEndX = WorldState.carriageX;
+          WorldState.ropeEndY = WorldState.carriageY;
+          WorldState.containerBoxX = WorldState.carriageX;
+          WorldState.containerBoxY = WorldState.carriageY;
+          return i;
+        }else{
+          return -1;
+        }
       }
     }
   }
