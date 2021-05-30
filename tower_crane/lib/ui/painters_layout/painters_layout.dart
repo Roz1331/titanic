@@ -24,7 +24,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
 
   @override
   void initState() {
-    streamSubscription = SimulListener.simulationStream.listen((event) {
+    streamSubscription = SimulationListener.simulationStream.listen((event) {
       setState(() {
         isSimulated = event;
       });

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-class SimulListener {
+class SimulationListener {
   static final StreamController streamController =
       StreamController<bool>.broadcast();
 
