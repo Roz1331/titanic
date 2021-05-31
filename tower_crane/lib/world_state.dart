@@ -58,6 +58,10 @@ class WorldState {
   }
 
   static void finishSimulation() {
+    boxPlaces[currentTarget]++;
+    ropeEndX = targetCenters[currentTarget].dx;
+    ropeEndY = targetCenters[currentTarget].dy;
+    ropeEndZ = 70;
     WorldState.isSimulated = false;
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
