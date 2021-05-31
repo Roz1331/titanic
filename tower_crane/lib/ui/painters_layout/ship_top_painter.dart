@@ -72,16 +72,16 @@ class FieldPainter extends CustomPainter {
           solidPainter.color = Color(0xFFFFFFFF);
           break;
         case 1:
-          solidPainter.color = Color(0xFFFFFF00);
+          solidPainter.color = i > 5 ? Color(0xFFFFFF00) : Color(0xFF66FFFF);
           break;
         case 2:
-          solidPainter.color = Color(0xFFFFAA00);
+          solidPainter.color = i > 5 ? Color(0xFFFFAA00) : Color(0xFF33CCFF);
           break;
         case 3:
-          solidPainter.color = Color(0xFFFF0000);
+          solidPainter.color = i > 5 ? Color(0xFFFF0000) : Color(0xFF3366FF);
           break;
         case 4:
-          solidPainter.color = Color(0xFFAA0000);
+          solidPainter.color = i > 5 ? Color(0xFFAA0000) : Color(0xFF336699);
           break;
       }
       var rect = Rect.fromPoints(

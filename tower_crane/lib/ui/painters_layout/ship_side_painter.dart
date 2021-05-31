@@ -69,20 +69,13 @@ class ShipSidePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..color = Color(0xFF000000);
 
-    canvas.drawRect(containerBox, boxPainter);
-    canvas.drawRect(containerBox, strokePainter);
-
-    var rope = Path();
-    rope.moveTo(WorldState.carriageX.w, WorldState.carriageZ.h);
-    rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndZ.h);
-    canvas.drawPath(rope, strokePainter);
+    
 
     Rect carriage = Rect.fromLTWH(
         (WorldState.carriageX - CarriageDimensions.length / 2).w,
         0,
         CarriageDimensions.length.w,
         CarriageDimensions.height.h);
-    
 
     Paint carriagePainter = Paint()..color = Color(0xFF0CBB95);
 
@@ -93,7 +86,44 @@ class ShipSidePainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = Color(0xFFFFFFFF);
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 6; i++) {
+      var x = leftContPart + ContainerBoxDimensions.length * (i % 6);
+      for (int j = 0; j < WorldState.boxPlaces[i]; j++) {
+        var z = WorldState.shipZ - ContainerBoxDimensions.height * j;
+        switch (j + 1) {
+          case 0:
+            solidPainter.color = Color(0xFFFFFFFF);
+            break;
+          case 1:
+            solidPainter.color = Color(0xFF66FFFF);
+            break;
+          case 2:
+            solidPainter.color = Color(0xFF33CCFF);
+            break;
+          case 3:
+            solidPainter.color = Color(0xFF3366FF);
+            break;
+          case 4:
+            solidPainter.color = Color(0xFF336699);
+            break;
+        }
+        var rect = Rect.fromPoints(
+            Offset(x.w, z.h),
+            Offset((x + ContainerBoxDimensions.length).w,
+                (z - ContainerBoxDimensions.height).h));
+        canvas.drawRect(rect, solidPainter);
+        canvas.drawRect(rect, strokePainter);
+      }
+    }
+    var rope = Path();
+    rope.moveTo(WorldState.carriageX.w, WorldState.carriageZ.h);
+    rope.lineTo(WorldState.ropeEndX.w, WorldState.ropeEndZ.h);
+    canvas.drawPath(rope, strokePainter);
+
+    canvas.drawRect(containerBox, boxPainter);
+    canvas.drawRect(containerBox, strokePainter);
+
+    for (int i = 6; i < 12; i++) {
       var x = leftContPart + ContainerBoxDimensions.length * (i % 6);
       for (int j = 0; j < WorldState.boxPlaces[i]; j++) {
         var z = WorldState.shipZ - ContainerBoxDimensions.height * j;

@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:tower_crane/logic.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
+import './ui/responsive_size.dart';
 
 class WorldState {
-
-
   static double shipX = 585.0, shipY = 200.0, shipZ = 278.0;
   static double waveZ = 468.0;
   static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
@@ -20,17 +19,17 @@ class WorldState {
   static double ropeEndY = 200.0;
   static double ropeEndZ = 70.0;
 
-  static void setRopeCoords(double ropeEndX,  double ropeEndY,  double ropeEndZ){
+  static void setRopeCoords(double ropeEndX, double ropeEndY, double ropeEndZ) {
     WorldState.ropeEndX = ropeEndX;
     WorldState.ropeEndY = ropeEndY;
     WorldState.ropeEndZ = ropeEndZ;
     WorldState.containerBoxX = ropeEndX;
     WorldState.containerBoxY = ropeEndY;
     WorldState.containerBoxZ = ropeEndZ + ContainerBoxDimensions.height;
-
   }
 
-  static void setIdealRopeCoords(double ropeEndX,  double ropeEndY,  double ropeEndZ){
+  static void setIdealRopeCoords(
+      double ropeEndX, double ropeEndY, double ropeEndZ) {
     WorldState.idealRopeEndX = ropeEndX;
     WorldState.idealRopeEndY = ropeEndY;
     WorldState.idealRopeEndZ = ropeEndZ;
@@ -59,6 +58,17 @@ class WorldState {
 
   static void finishSimulation() {
     boxPlaces[currentTarget]++;
+    while (boxPlaces[currentTarget % 12] == 4) {
+      currentTarget++;
+    }
+    currentTarget = currentTarget % 12;
+    WorldState.carriageX = targetCenters[currentTarget].dx.antiw;
+    WorldState.carriageY = targetCenters[currentTarget].dy.antih;
+
+    WorldState.setRopeCoords(
+        WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
+    WorldState.containerBoxX = WorldState.carriageX;
+    WorldState.containerBoxY = WorldState.carriageY;
     ropeEndX = targetCenters[currentTarget].dx;
     ropeEndY = targetCenters[currentTarget].dy;
     ropeEndZ = 70;
@@ -69,5 +79,4 @@ class WorldState {
   static double containerDownVelocity = 0;
 
   static double containerToShipDistance = 118;
-
 }

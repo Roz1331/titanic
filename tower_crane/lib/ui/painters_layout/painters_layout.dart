@@ -43,11 +43,12 @@ class _PaintersLayoutState extends State<PaintersLayout> {
       setState(() {
         radians += 0.01;
         Physics.containerMovement();
-        if(WorldState.isSimulated){
+        if (WorldState.isSimulated) {
           Logic.containerDownVelocity();
           //print(WorldState.containerDownVelocity);
           print("before");
-          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 10).h);
+          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY,
+              WorldState.ropeEndZ + (WorldState.containerDownVelocity / 10).h);
           print("after");
         }
       });
@@ -128,8 +129,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         if (WorldState.boxPlaces[i] < 4) {
           WorldState.carriageX = rect.center.dx.antiw;
           WorldState.carriageY = rect.center.dy.antih;
-          //WorldState.ropeEndX = WorldState.carriageX;
-          //WorldState.ropeEndY = WorldState.carriageY;
+
           WorldState.setRopeCoords(
               WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
           WorldState.containerBoxX = WorldState.carriageX;
