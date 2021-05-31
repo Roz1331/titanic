@@ -105,6 +105,7 @@ class _WindSettingsState extends State<WindSettings> {
               max: 45,
               onDragging: (_, value, __) {
                 setState(() {
+                  WorldState.oldSpeed = WorldState.windSpeed;
                   WorldState.windSpeed = value;
                 });
               },

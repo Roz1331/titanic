@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:calculess/calculess.dart';
-import 'package:tower_crane/common_point.dart';
+import 'package:tower_crane/logic/common_point.dart';
 import 'package:tower_crane/physics/physics.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/world_state.dart';

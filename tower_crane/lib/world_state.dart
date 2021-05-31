@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:tower_crane/logicZDown.dart';
+import 'package:tower_crane/logic/logicZDown.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 
@@ -67,9 +67,12 @@ class WorldState {
   }
 
   static double containerDownVelocity = 0;
+  static double containerUpVelocity = 0;
 
   static double containerToShipDistance = 118;
+  static double containerSpeedDifference = 45;
 
-  static double oldSpeed;
+
+  static double oldSpeed=0;
 
 }
