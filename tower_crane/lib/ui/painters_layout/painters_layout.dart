@@ -53,7 +53,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           LogicX.carriageXVelocity();
           LogicY.carriageYVelocity();
           WorldState.carriageX += ((WorldState.carriageXVelocity * sin(WorldState.windDirection).sign) / 10).w;
-          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(WorldState.windDirection).sign * (-1)) / 10).h;
+          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(WorldState.windDirection).sign) / 10).h;
           WorldState.setRopeCoords(
               WorldState.ropeEndX,
               WorldState.ropeEndY,
