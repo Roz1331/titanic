@@ -110,52 +110,64 @@ class Logic {
       });
 
       double numerator = 0;
-      numerator += Calc.integral(
-          coordinates[0],
-          coordinates[1],
-          (x) =>
-              x *
-              (x * (1 - 0) - coordinates[0] * 1 + 0 * coordinates[1]) /
-              (coordinates[1] - coordinates[0]),
-          10);
-      numerator += Calc.integral(
-          coordinates[1],
-          coordinates[2],
-          (x) =>
-              x *
-              (x * (1 - 1) - coordinates[1] * 1 + 1 * coordinates[2]) /
-              (coordinates[2] - coordinates[1]),
-          10);
-      numerator += Calc.integral(
-          coordinates[2],
-          coordinates[3],
-          (x) =>
-              x *
-              (x * (0 - 1) - coordinates[2] * 0 + 1 * coordinates[3]) /
-              (coordinates[3] - coordinates[2]),
-          10);
+      if (coordinates[1] != coordinates[0]) {
+        numerator += Calc.integral(
+            coordinates[0],
+            coordinates[1],
+            (x) =>
+                x *
+                (x * (1 - 0) - coordinates[0] * 1 + 0 * coordinates[1]) /
+                (coordinates[1] - coordinates[0]),
+            10);
+      }
+      if (coordinates[1] != coordinates[2]) {
+        numerator += Calc.integral(
+            coordinates[1],
+            coordinates[2],
+            (x) =>
+                x *
+                (x * (1 - 1) - coordinates[1] * 1 + 1 * coordinates[2]) /
+                (coordinates[2] - coordinates[1]),
+            10);
+      }
+      if (coordinates[3] != coordinates[2]) {
+        numerator += Calc.integral(
+            coordinates[2],
+            coordinates[3],
+            (x) =>
+                x *
+                (x * (0 - 1) - coordinates[2] * 0 + 1 * coordinates[3]) /
+                (coordinates[3] - coordinates[2]),
+            10);
+      }
       double denominator = 0;
-      denominator += Calc.integral(
-          coordinates[0],
-          coordinates[1],
-          (x) =>
-              (x * (1 - 0) - coordinates[0] * 1 + 0 * coordinates[1]) /
-              (coordinates[1] - coordinates[0]),
-          10);
-      denominator += Calc.integral(
-          coordinates[1],
-          coordinates[2],
-          (x) =>
-              (x * (1 - 1) - coordinates[1] * 1 + 1 * coordinates[2]) /
-              (coordinates[2] - coordinates[1]),
-          10);
-      denominator += Calc.integral(
-          coordinates[2],
-          coordinates[3],
-          (x) =>
-              (x * (0 - 1) - coordinates[2] * 0 + 1 * coordinates[3]) /
-              (coordinates[3] - coordinates[2]),
-          10);
+      if (coordinates[0] != coordinates[1]) {
+        denominator += Calc.integral(
+            coordinates[0],
+            coordinates[1],
+            (x) =>
+                (x * (1 - 0) - coordinates[0] * 1 + 0 * coordinates[1]) /
+                (coordinates[1] - coordinates[0]),
+            10);
+      }
+      if (coordinates[1] != coordinates[2]) {
+        denominator += Calc.integral(
+            coordinates[1],
+            coordinates[2],
+            (x) =>
+                (x * (1 - 1) - coordinates[1] * 1 + 1 * coordinates[2]) /
+                (coordinates[2] - coordinates[1]),
+            10);
+      }
+      if (coordinates[2] != coordinates[3]) {
+        denominator += Calc.integral(
+            coordinates[2],
+            coordinates[3],
+            (x) =>
+                (x * (0 - 1) - coordinates[2] * 0 + 1 * coordinates[3]) /
+                (coordinates[3] - coordinates[2]),
+            10);
+      }
       print("2 $denominator");
       WorldState.containerDownVelocity = numerator / denominator;
     } else {
@@ -185,170 +197,189 @@ class Logic {
           probabilities2[1] > commonPoint.y) {
         double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
-        numerator += Calc.integral(
-            finalCoordinates[0],
-            max,
-            (x) =>
-                x *
-                ((x * (1 - 0) -
-                        finalCoordinates[0] * 1 +
-                        0 * finalCoordinates[1]) /
-                    (finalCoordinates[1] - finalCoordinates[0])),
-            10);
+        if (finalCoordinates[1] != finalCoordinates[0]) {
+          numerator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  x *
+                  ((x * (1 - 0) -
+                          finalCoordinates[0] * 1 +
+                          0 * finalCoordinates[1]) /
+                      (finalCoordinates[1] - finalCoordinates[0])),
+              10);
+        }
 
         double max2 = _getXFromEquation(
             probabilities2[0], finalCoordinates[2], 1, finalCoordinates[3], 0);
         numerator += Calc.integral(max, max2, (x) => x * probabilities2[0], 10);
-
-        numerator += Calc.integral(
-            max2,
-            commonPoint.x,
-            (x) =>
-                x *
-                ((x * (0 - 1) -
-                        finalCoordinates[2] * 0 +
-                        1 * finalCoordinates[3]) /
-                    (finalCoordinates[3] - finalCoordinates[2])),
-            10);
+        if (finalCoordinates[3] != finalCoordinates[2]) {
+          numerator += Calc.integral(
+              max2,
+              commonPoint.x,
+              (x) =>
+                  x *
+                  ((x * (0 - 1) -
+                          finalCoordinates[2] * 0 +
+                          1 * finalCoordinates[3]) /
+                      (finalCoordinates[3] - finalCoordinates[2])),
+              10);
+        }
 
         double max3 = _getXFromEquation(
             probabilities2[1], finalCoordinates[2], 0, finalCoordinates[3], 1);
-        numerator += Calc.integral(
-            commonPoint.x,
-            max3,
-            (x) =>
-                x *
-                ((x * (1 - 0) -
-                        finalCoordinates[2] * 1 +
-                        0 * finalCoordinates[3]) /
-                    (finalCoordinates[3] - finalCoordinates[2])),
-            10);
+        if (finalCoordinates[3] != finalCoordinates[2]) {
+          numerator += Calc.integral(
+              commonPoint.x,
+              max3,
+              (x) =>
+                  x *
+                  ((x * (1 - 0) -
+                          finalCoordinates[2] * 1 +
+                          0 * finalCoordinates[3]) /
+                      (finalCoordinates[3] - finalCoordinates[2])),
+              10);
+        }
 
         double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
         numerator +=
             Calc.integral(max3, max4, (x) => x * probabilities2[1], 10);
-        numerator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-            (x) =>
-                x *
-                ((x * (0 - 1) -
-                        finalCoordinates[4] * 0 +
-                        1 * finalCoordinates[5]) /
-                    (finalCoordinates[5] - finalCoordinates[4])),
-            10);
-
-        denominator += Calc.integral(
-            finalCoordinates[0],
-            max,
-            (x) =>
-                (x * (1 - 0) -
-                    finalCoordinates[0] * 1 +
-                    0 * finalCoordinates[1]) /
-                (finalCoordinates[1] - finalCoordinates[0]),
-            10);
+        if (finalCoordinates[5] != finalCoordinates[4]) {
+          numerator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  x *
+                  ((x * (0 - 1) -
+                          finalCoordinates[4] * 0 +
+                          1 * finalCoordinates[5]) /
+                      (finalCoordinates[5] - finalCoordinates[4])),
+              10);
+        }
+        if (finalCoordinates[0] != finalCoordinates[1]) {
+          denominator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  (x * (1 - 0) -
+                      finalCoordinates[0] * 1 +
+                      0 * finalCoordinates[1]) /
+                  (finalCoordinates[1] - finalCoordinates[0]),
+              10);
+        }
 
         denominator += Calc.integral(max, max2, (x) => probabilities2[0], 10);
-
-        denominator += Calc.integral(
-            max2,
-            commonPoint.x,
-            (x) =>
-                (x * (0 - 1) -
-                    finalCoordinates[2] * 0 +
-                    1 * finalCoordinates[3]) /
-                (finalCoordinates[3] - finalCoordinates[2]),
-            10);
-
-        denominator += Calc.integral(
-            commonPoint.x,
-            max3,
-            (x) =>
-                (x * (1 - 0) -
-                    finalCoordinates[2] * 1 +
-                    0 * finalCoordinates[3]) /
-                (finalCoordinates[3] - finalCoordinates[2]),
-            10);
+        if (finalCoordinates[2] != finalCoordinates[3]) {
+          denominator += Calc.integral(
+              max2,
+              commonPoint.x,
+              (x) =>
+                  (x * (0 - 1) -
+                      finalCoordinates[2] * 0 +
+                      1 * finalCoordinates[3]) /
+                  (finalCoordinates[3] - finalCoordinates[2]),
+              10);
+        }
+        if (finalCoordinates[3] != finalCoordinates[2]) {
+          denominator += Calc.integral(
+              commonPoint.x,
+              max3,
+              (x) =>
+                  (x * (1 - 0) -
+                      finalCoordinates[2] * 1 +
+                      0 * finalCoordinates[3]) /
+                  (finalCoordinates[3] - finalCoordinates[2]),
+              10);
+        }
 
         denominator += Calc.integral(max3, max4, (x) => probabilities2[1], 10);
-        denominator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-            (x) =>
-                (x * (0 - 1) -
-                    finalCoordinates[4] * 0 +
-                    1 * finalCoordinates[5]) /
-                (finalCoordinates[5] - finalCoordinates[4]),
-            10);
+        if (finalCoordinates[4] != finalCoordinates[5]) {
+          denominator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  (x * (0 - 1) -
+                      finalCoordinates[4] * 0 +
+                      1 * finalCoordinates[5]) /
+                  (finalCoordinates[5] - finalCoordinates[4]),
+              10);
+        }
         print("3  $denominator");
         WorldState.containerDownVelocity = numerator / denominator;
       } else if (probabilities2[0] == probabilities2[1] && probabilities2[0] == commonPoint.y) {
         double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
-        numerator += Calc.integral(
-            finalCoordinates[0],
-            max,
-                (x) =>
-            x *
-                ((x * (1 - 0) -
-                    finalCoordinates[0] * 1 +
-                    0 * finalCoordinates[1]) /
-                    (finalCoordinates[1] - finalCoordinates[0])),
-            10);
+        if (finalCoordinates[1] != finalCoordinates[0]) {
+          numerator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  x *
+                  ((x * (1 - 0) -
+                          finalCoordinates[0] * 1 +
+                          0 * finalCoordinates[1]) /
+                      (finalCoordinates[1] - finalCoordinates[0])),
+              10);
+        }
         double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
 
         numerator += Calc.integral(max, max4, (x) => x * commonPoint.y, 10);
+        if (finalCoordinates[5] != finalCoordinates[4]) {
+          numerator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  x *
+                  ((x * (0 - 1) -
+                          finalCoordinates[4] * 0 +
+                          1 * finalCoordinates[5]) /
+                      (finalCoordinates[5] - finalCoordinates[4])),
+              10);
+        }
 
-        numerator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-                (x) =>
-            x *
-                ((x * (0 - 1) -
-                    finalCoordinates[4] * 0 +
-                    1 * finalCoordinates[5]) /
-                    (finalCoordinates[5] - finalCoordinates[4])),
-            10);
-
-
-        denominator += Calc.integral(
-            finalCoordinates[0],
-            max,
-                (x) =>
-            (x * (1 - 0) -
-                    finalCoordinates[0] * 1 +
-                    0 * finalCoordinates[1]) /
-                    (finalCoordinates[1] - finalCoordinates[0]),
-            10);
+        if (finalCoordinates[1] != finalCoordinates[0]) {
+          denominator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  (x * (1 - 0) -
+                      finalCoordinates[0] * 1 +
+                      0 * finalCoordinates[1]) /
+                  (finalCoordinates[1] - finalCoordinates[0]),
+              10);
+        }
 
         denominator += Calc.integral(max, max4, (x) => commonPoint.y, 10);
-
-        denominator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-                (x) =>
-            (x * (0 - 1) -
-                    finalCoordinates[4] * 0 +
-                    1 * finalCoordinates[5]) /
-                    (finalCoordinates[5] - finalCoordinates[4]),
-            10);
+        if (finalCoordinates[4] != finalCoordinates[5]) {
+          denominator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  (x * (0 - 1) -
+                      finalCoordinates[4] * 0 +
+                      1 * finalCoordinates[5]) /
+                  (finalCoordinates[5] - finalCoordinates[4]),
+              10);
+        }
 
         WorldState.containerDownVelocity = numerator / denominator;
       } else {
         double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
-        numerator += Calc.integral(
-            finalCoordinates[0],
-            max,
-            (x) =>
-                x *
-                ((x * (1 - 0) -
-                        finalCoordinates[0] * 1 +
-                        0 * finalCoordinates[1]) /
-                    (finalCoordinates[1] - finalCoordinates[0])),
-            10);
+        if (finalCoordinates[1] != finalCoordinates[0]) {
+          numerator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  x *
+                  ((x * (1 - 0) -
+                          finalCoordinates[0] * 1 +
+                          0 * finalCoordinates[1]) /
+                      (finalCoordinates[1] - finalCoordinates[0])),
+              10);
+        }
 
         double max2 = 0, max3 = 0;
         if (probabilities2[0] > probabilities2[1]) {
@@ -363,69 +394,79 @@ class Logic {
               finalCoordinates[3], 1);
         }
         numerator += Calc.integral(max, max2, (x) => x * probabilities2[0], 10);
-        numerator += Calc.integral(
-            max2,
-            max3,
-            (x) =>
-                x *
-                ((x * (probabilities2[1] - probabilities2[0]) -
-                        max2 * probabilities2[1] +
-                        probabilities2[0] * max3) /
-                    (max3 - max2)),
-            10);
+        if (max3 != max2) {
+          numerator += Calc.integral(
+              max2,
+              max3,
+              (x) =>
+                  x *
+                  ((x * (probabilities2[1] - probabilities2[0]) -
+                          max2 * probabilities2[1] +
+                          probabilities2[0] * max3) /
+                      (max3 - max2)),
+              10);
+        }
         double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
         numerator +=
             Calc.integral(max3, max4, (x) => x * probabilities2[1], 10);
-        numerator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-            (x) =>
-                x *
-                ((x * (0 - 1) -
-                        finalCoordinates[4] * 0 +
-                        1 * finalCoordinates[5]) /
-                    (finalCoordinates[5] - finalCoordinates[4])),
-            10);
-        print("4 1 $denominator");
-        denominator += Calc.integral(
-            finalCoordinates[0],
-            max,
-            (x) =>
-                (x * (1 - 0) -
-                    finalCoordinates[0] * 1 +
-                    0 * finalCoordinates[1]) /
-                (finalCoordinates[1] - finalCoordinates[0]),
-            10);
-        print("4 2 $denominator");
+        if (finalCoordinates[5] != finalCoordinates[4]) {
+          numerator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  x *
+                  ((x * (0 - 1) -
+                          finalCoordinates[4] * 0 +
+                          1 * finalCoordinates[5]) /
+                      (finalCoordinates[5] - finalCoordinates[4])),
+              10);
+        }
+
+        if (finalCoordinates[1] != finalCoordinates[0]) {
+          denominator += Calc.integral(
+              finalCoordinates[0],
+              max,
+              (x) =>
+                  (x * (1 - 0) -
+                      finalCoordinates[0] * 1 +
+                      0 * finalCoordinates[1]) /
+                  (finalCoordinates[1] - finalCoordinates[0]),
+              10);
+        }
+
         denominator += Calc.integral(max, max2, (x) => probabilities2[0], 10);
-        print("4 3 $denominator");
-        print("$max2 $max3 ${probabilities2[1]} ${probabilities2[0]}");
-        var tempp = Calc.integral(
-            max2,
-            max3,
-            (x) =>
-                (x * (probabilities2[1] - probabilities2[0]) -
-                    max2 * probabilities2[1] +
-                    probabilities2[0] * max3) /
-                (max3 - max2),
-            10);
-        denominator += tempp;
-            print("4 4 $denominator $tempp");
+
+        if (max3 != max2) {
+          var tempp = Calc.integral(
+              max2,
+              max3,
+              (x) =>
+                  (x * (probabilities2[1] - probabilities2[0]) -
+                      max2 * probabilities2[1] +
+                      probabilities2[0] * max3) /
+                  (max3 - max2),
+              10);
+          denominator += tempp;
+
+        }
         denominator += Calc.integral(max3, max4, (x) => probabilities2[1], 10);
-        print("4 5 $denominator");
-        denominator += Calc.integral(
-            max4,
-            finalCoordinates[5],
-            (x) =>
-                (x * (0 - 1) -
-                    finalCoordinates[4] * 0 +
-                    1 * finalCoordinates[5]) /
-                (finalCoordinates[5] - finalCoordinates[4]),
-            10);
-        print("4 6 $denominator");
+
+        if (finalCoordinates[5] != finalCoordinates[4]) {
+          denominator += Calc.integral(
+              max4,
+              finalCoordinates[5],
+              (x) =>
+                  (x * (0 - 1) -
+                      finalCoordinates[4] * 0 +
+                      1 * finalCoordinates[5]) /
+                  (finalCoordinates[5] - finalCoordinates[4]),
+              10);
+        }
+
         WorldState.containerDownVelocity = numerator / denominator;
       }
     }
+    print(WorldState.containerDownVelocity);
   }
 }

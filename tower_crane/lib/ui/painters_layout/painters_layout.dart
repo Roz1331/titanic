@@ -45,9 +45,10 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         Physics.containerMovement();
         if(WorldState.isSimulated){
           Logic.containerDownVelocity();
-          print(WorldState.containerDownVelocity);
-
-          //WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 100).h);
+          //print(WorldState.containerDownVelocity);
+          print("before");
+          // WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 100).h);
+          print("after");
         }
       });
       WorldState.shipZ += WaveDimensions.amplitude *
