@@ -4,7 +4,7 @@ import 'package:equations/equations.dart';
 import 'package:flutter/foundation.dart';
 
 class CommonPoint {
-  static Point findCommonPoint(
+  static MyPoint findCommonPoint(
       {@required LinearEquation firstEquation, @required LinearEquation secondEquation}) {
     final luSolver = LUSolver(
       equations: [
@@ -14,14 +14,14 @@ class CommonPoint {
       constants: [firstEquation.constant, secondEquation.constant],
     );
     List<double> result = luSolver.solve();
-    Point commonPoint = Point(result[0], result[1]);
+    MyPoint commonPoint = MyPoint(result[0], result[1]);
     return commonPoint;
   }
 }
 
 class LinearEquation {
-  final Point firstPoint;
-  final Point secondPoint;
+  final MyPoint firstPoint;
+  final MyPoint secondPoint;
 
   LinearEquation(this.firstPoint, this.secondPoint);
 
@@ -32,4 +32,10 @@ class LinearEquation {
           firstPoint.x /
           (secondPoint.x - firstPoint.x)) -
       firstPoint.y;
+}
+
+class MyPoint{
+  final double x;
+  final double y;
+  MyPoint(this.x, this.y);
 }
