@@ -66,8 +66,12 @@ class WorldState {
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
 
+
   static double containerDownVelocity = 0;
   static double containerUpVelocity = 0;
+
+  static double carriageXVelocity = 0;
+  static double carriageYVelocity = 0;
 
   static double containerToShipDistance = 118;
   static double containerSpeedDifference = 45;
