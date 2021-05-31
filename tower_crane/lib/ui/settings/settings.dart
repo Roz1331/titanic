@@ -8,13 +8,11 @@ import '../responsive_size.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var width = 364.w;
-    print("Settings " + width.toString());
     return Container(
       padding: EdgeInsets.only(
         top: 79.h,
       ),
-      width: width,
+      width: 364.w,
       child: Column(
         children: [
           WindSettings(),

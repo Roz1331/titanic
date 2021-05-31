@@ -21,6 +21,7 @@ class _WaveSettingsState extends State<WaveSettings> {
     streamSubscription.cancel();
     super.dispose();
   }
+
   @override
   void initState() {
     streamSubscription = SimulationListener.simulationStream.listen((event) {
@@ -30,7 +31,6 @@ class _WaveSettingsState extends State<WaveSettings> {
     });
     super.initState();
   }
-  
 
   int selectedTile = 0;
 
@@ -43,8 +43,6 @@ class _WaveSettingsState extends State<WaveSettings> {
 
   @override
   Widget build(BuildContext context) {
-    var width = 270.w;
-    print("Wave " + width.toString());
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 20.h,
@@ -57,7 +55,7 @@ class _WaveSettingsState extends State<WaveSettings> {
         ),
       ),
       height: 230.h,
-      width: width,
+      width: 270.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
