@@ -468,5 +468,8 @@ class Logic {
       }
     }
     print(WorldState.containerDownVelocity);
+    if (WorldState.containerToShipDistance < 0.5){
+      WorldState.finishSimulation();
+    }
   }
 }

@@ -47,7 +47,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Logic.containerDownVelocity();
           //print(WorldState.containerDownVelocity);
           print("before");
-          // WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 100).h);
+          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 10).h);
           print("after");
         }
       });
