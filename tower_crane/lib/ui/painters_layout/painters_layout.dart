@@ -8,7 +8,7 @@ import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
-import '../../logic.dart';
+import '../../logicZDown.dart';
 import '../../physics/physics.dart';
 import '../responsive_size.dart';
 
