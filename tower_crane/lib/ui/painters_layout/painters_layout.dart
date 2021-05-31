@@ -8,6 +8,7 @@ import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
+import '../../logic.dart';
 import '../../physics/physics.dart';
 import '../responsive_size.dart';
 
@@ -37,10 +38,17 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         isSimulated = event;
       });
     });
+
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
       setState(() {
         radians += 0.01;
         Physics.containerMovement();
+        if(WorldState.isSimulated){
+          Logic.containerDownVelocity();
+          print(WorldState.containerDownVelocity);
+
+          //WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 100).h);
+        }
       });
       WorldState.shipZ += WaveDimensions.amplitude *
           (WorldState.waveFunction(radians) -
