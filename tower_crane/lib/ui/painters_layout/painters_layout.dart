@@ -8,7 +8,7 @@ import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
-import '../../logicZDown.dart';
+import '../../logic/logicZDown.dart';
 import '../../physics/physics.dart';
 import '../responsive_size.dart';
 
@@ -47,7 +47,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           Logic.containerDownVelocity();
           //print(WorldState.containerDownVelocity);
           print("before");
-          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.containerDownVelocity / 10).h);
+          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + (WorldState.carriageYVelocity / 10).h);
           print("after");
         }
       });
