@@ -54,9 +54,9 @@ class Logic {
       }
     }
 
-    List velocityList = [];
-
+    Map velocityMap = Map();
     velocityProbability.forEach((key, value) {
+      List velocityList = [];
       if(key == "stopV") {
         velocityList.add(0);
         velocityList.add(0.3);
@@ -84,9 +84,10 @@ class Logic {
         velocityList.add(10);
         velocityList.add(20);
       }
+      velocityMap[key] = velocityList;
     });
-    
 
+    
 
 
     double time = 0;
