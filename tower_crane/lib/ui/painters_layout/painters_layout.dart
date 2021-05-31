@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tower_crane/logic/logicZUp.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
 import 'package:tower_crane/ui/painters_layout/ship_top_painter.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import 'package:tower_crane/world_state.dart';
 
-import '../../logic.dart';
+import '../../logic/logicZDown.dart';
 import '../../physics/physics.dart';
 import '../responsive_size.dart';
 
@@ -45,10 +46,12 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         Physics.containerMovement();
         if (WorldState.isSimulated) {
           Logic.containerDownVelocity();
+          LogicZUp.containerUpVelocity();
           //print(WorldState.containerDownVelocity);
           print("before");
-          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY,
-              WorldState.ropeEndZ + (WorldState.containerDownVelocity / 10).h);
+
+          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + ((WorldState.containerDownVelocity - WorldState.containerUpVelocity ) / 10).h);
+
           print("after");
         }
       });
