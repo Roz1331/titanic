@@ -30,6 +30,16 @@ class WorldState {
 
   }
 
+  static void setIdealRopeCoords(double ropeEndX,  double ropeEndY,  double ropeEndZ){
+    WorldState.idealRopeEndX = ropeEndX;
+    WorldState.idealRopeEndY = ropeEndY;
+    WorldState.idealRopeEndZ = ropeEndZ;
+  }
+
+  static double idealRopeEndX = ropeEndX;
+  static double idealRopeEndY = ropeEndY;
+  static double idealRopeEndZ = ropeEndZ;
+
   static var boxPlaces = [1, 4, 0, 4, 2, 0, 0, 0, 0, 4, 1, 3];
   static List<Offset> targetCenters = [];
   static int currentTarget = 0;

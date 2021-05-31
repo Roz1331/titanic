@@ -14,26 +14,42 @@ bool belongToInterval(double x, double left, double right) {
 class Physics {
   static int marginTop = 30;
 
+  static bool _containerHasReachedIdeal() {
+    return WorldState.idealRopeEndX == WorldState.ropeEndX &&
+        WorldState.idealRopeEndY == WorldState.ropeEndY;
+  }
+
+  static void windAbsorbtion() {
+    double k = 0.015;
+    double dx = WorldState.idealRopeEndX - WorldState.ropeEndX;
+    double dy = WorldState.idealRopeEndY - WorldState.ropeEndY;
+    if (!_containerHasReachedIdeal()) {
+      WorldState.setRopeCoords(
+        WorldState.ropeEndX + dx * k,
+        WorldState.ropeEndY + dy * k,
+        WorldState.ropeEndZ,
+      );
+    }
+  }
+
   //вернет лист точек конца веревки
   static void containerMovement() {
     double zCoordTemp =
         WorldState.ropeLength * cos(_radianConverter(WorldState.windSpeed));
     double zCoordinate = marginTop + zCoordTemp;
-    WorldState.ropeEndZ = zCoordinate;
 
     double xCoordTemp = WorldState.ropeLength *
         sin(_radianConverter(WorldState.windSpeed)); // радиус окружности
     double xCoordTemp2 = xCoordTemp *
         sin(_radianConverter(WorldState.windDirection)); // смещение по Х
     double xCoordinate = WorldState.carriageX + xCoordTemp2;
-    //WorldState.ropeEndX = xCoordinate;
 
     double yCoordTemp = xCoordTemp; // радиус окружности
     double yCoordTemp2 = yCoordTemp *
         cos(_radianConverter(WorldState.windDirection)); // смещение по Y
     double yCoordinate = WorldState.carriageY + yCoordTemp2;
-    //WorldState.ropeEndY = yCoordinate;
-    WorldState.setRopeCoords(xCoordinate,yCoordinate,WorldState.ropeEndZ);
+    WorldState.setIdealRopeCoords(xCoordinate, yCoordinate, zCoordinate);
+    windAbsorbtion();
   }
 
   //обнуляет ветер при достижении контейнера
