@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tower_crane/logic/LogicY.dart';
+import 'package:tower_crane/logic/logicX.dart';
 import 'package:tower_crane/logic/logicZUp.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/painters_layout/ship_side_painter.dart';
@@ -47,12 +50,18 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         if (WorldState.isSimulated) {
           Logic.containerDownVelocity();
           LogicZUp.containerUpVelocity();
-          //print(WorldState.containerDownVelocity);
-          print("before");
-
-          WorldState.setRopeCoords(WorldState.ropeEndX, WorldState.ropeEndY, WorldState.ropeEndZ + ((WorldState.containerDownVelocity - WorldState.containerUpVelocity ) / 10).h);
-
-          print("after");
+          LogicX.carriageXVelocity();
+          LogicY.carriageYVelocity();
+          WorldState.carriageX += ((WorldState.carriageXVelocity * sin(WorldState.windDirection).sign) / 10).w;
+          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(WorldState.windDirection).sign * (-1)) / 10).h;
+          WorldState.setRopeCoords(
+              WorldState.ropeEndX,
+              WorldState.ropeEndY,
+              WorldState.ropeEndZ +
+                  ((WorldState.containerDownVelocity -
+                              WorldState.containerUpVelocity) /
+                          10)
+                      .h);
         }
       });
       WorldState.shipZ += WaveDimensions.amplitude *

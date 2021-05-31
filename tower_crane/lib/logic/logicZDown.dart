@@ -169,7 +169,7 @@ class Logic {
             10);
       }
       print("2 $denominator");
-      WorldState.carriageYVelocity = numerator / denominator;
+      WorldState.containerDownVelocity = numerator / denominator;
     } else {
       List<List<double>> coordinates = [];
       List<double> probabilities2 = [];
@@ -306,7 +306,7 @@ class Logic {
               10);
         }
         print("3  $denominator");
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       } else if (probabilities2[0] == probabilities2[1] && probabilities2[0] == commonPoint.y) {
         double max = getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
@@ -364,7 +364,7 @@ class Logic {
               10);
         }
 
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       } else {
         double max = getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
@@ -464,10 +464,10 @@ class Logic {
               10);
         }
 
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       }
     }
-    print(WorldState.carriageYVelocity);
+    print(WorldState.containerDownVelocity);
     if (WorldState.containerToShipDistance < 0.5){
       WorldState.finishSimulation();
     }
