@@ -22,8 +22,9 @@ class Physics {
   static void windAbsorbtion() {
     double k = 0.015;
     double dx = WorldState.idealRopeEndX - WorldState.ropeEndX;
-    double dy = WorldState.idealRopeEndY - WorldState.ropeEndY;
+      double dy = WorldState.idealRopeEndY - WorldState.ropeEndY;
     if (!_containerHasReachedIdeal()) {
+      
       WorldState.setRopeCoords(
         WorldState.ropeEndX + dx * k,
         WorldState.ropeEndY + dy * k,
