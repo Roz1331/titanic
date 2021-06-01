@@ -39,7 +39,7 @@ class WorldState {
   static double idealRopeEndY = ropeEndY;
   static double idealRopeEndZ = ropeEndZ;
 
-  static var boxPlaces = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  static var boxPlaces = [0, 1, 0, 4, 3, 3, 0, 4, 0, 1, 2, 3];
   static List<Offset> targetCenters = [];
   static int currentTarget = 0;
 

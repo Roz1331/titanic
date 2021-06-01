@@ -56,7 +56,7 @@ class Physics {
   //обнуляет ветер при достижении контейнера
   static void containerMovementWithBlocks() {
     double windDirection = WorldState.windDirection;
-    double windSpeed = WorldState.windSpeed;
+    
     int currentTarget = WorldState.currentTarget;
 
     int sector = 0;
@@ -85,27 +85,31 @@ class Physics {
     map["l"] = -1;
     map["ul"] = -1;
 
-    if (currentTarget > 6)
-      map["u"] = 0;
-    else
+    if (currentTarget > 5)
       map["d"] = 0;
-    if (currentTarget == 0 || currentTarget == 7) map["l"] = 0;
-    if (currentTarget == 6 || currentTarget == 13) map["r"] = 0;
+    else
+      map["u"] = 0;
+    if (currentTarget == 0 || currentTarget == 6) map["l"] = 0;
+    if (currentTarget == 5 || currentTarget == 11) map["r"] = 0;
+    if (currentTarget == 0) map["ul"] = 0;
+    if (currentTarget == 5) map["ur"] = 0;
+    if (currentTarget == 6) map["dl"] = 0;
+    if (currentTarget == 11) map["dr"] = 0;
 
     for (var item in map.entries) {
       if (item.value == -1) {
-        if (item.key == "u") map["u"] = WorldState.boxPlaces[currentTarget - 7];
-        if (item.key == "d") map["d"] = WorldState.boxPlaces[currentTarget + 7];
+        if (item.key == "u") map["u"] = WorldState.boxPlaces[currentTarget - 6];
+        if (item.key == "d") map["d"] = WorldState.boxPlaces[currentTarget + 6];
         if (item.key == "l") map["l"] = WorldState.boxPlaces[currentTarget - 1];
         if (item.key == "r") map["r"] = WorldState.boxPlaces[currentTarget + 1];
         if (item.key == "ur")
-          map["ur"] = WorldState.boxPlaces[currentTarget - 6];
+          map["ur"] = WorldState.boxPlaces[currentTarget - 5];
         if (item.key == "dr")
-          map["dr"] = WorldState.boxPlaces[currentTarget + 8];
+          map["dr"] = WorldState.boxPlaces[currentTarget + 7];
         if (item.key == "dl")
-          map["dl"] = WorldState.boxPlaces[currentTarget + 6];
+          map["dl"] = WorldState.boxPlaces[currentTarget + 5];
         if (item.key == "ul")
-          map["ul"] = WorldState.boxPlaces[currentTarget - 8];
+          map["ul"] = WorldState.boxPlaces[currentTarget - 7];
       }
     }
 
@@ -113,8 +117,8 @@ class Physics {
       case 1:
         if (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
             WorldState.ropeEndZ + ContainerBoxDimensions.height) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 2:
@@ -122,8 +126,8 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 3:
@@ -131,15 +135,15 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["r"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 4:
         if (WorldState.shipZ + map["r"] * ContainerBoxDimensions.height <=
             WorldState.ropeEndZ + ContainerBoxDimensions.height) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 5:
@@ -147,8 +151,8 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["dr"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 6:
@@ -156,15 +160,15 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 7:
         if (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
             WorldState.ropeEndZ + ContainerBoxDimensions.height) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 8:
@@ -172,8 +176,8 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["d"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 9:
@@ -181,15 +185,15 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["l"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 10:
         if (WorldState.shipZ + map["l"] * ContainerBoxDimensions.height <=
             WorldState.ropeEndZ + ContainerBoxDimensions.height) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 11:
@@ -197,8 +201,8 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["ul"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       case 12:
@@ -206,8 +210,8 @@ class Physics {
                 WorldState.ropeEndZ + ContainerBoxDimensions.height) ||
             (WorldState.shipZ + map["u"] * ContainerBoxDimensions.height <=
                 WorldState.ropeEndZ + ContainerBoxDimensions.height)) {
-          windDirection = 0;
-          windSpeed = 0;
+          WorldState.windDirection = 0;
+          WorldState.windSpeed = 0;
         }
         break;
       default:

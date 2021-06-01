@@ -19,7 +19,7 @@ class LogicY {
     if((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs() < 40) {
       double sensorY = (WorldState.ropeLength *
               cos(_radianConverter(WorldState.windDirection)) *
-              cos(_radianConverter(WorldState.windSpeed)))
+              sin(_radianConverter(WorldState.windSpeed)))
           .abs();
 
       List<String> sensorYList = [];
