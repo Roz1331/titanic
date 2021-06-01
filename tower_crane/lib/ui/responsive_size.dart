@@ -7,19 +7,23 @@ class ResponsiveSize {
   }
 
   static double width(num value) {
-    return value * (_width / 1536);
+    // return value * (_width / 1536);
+    return value;
   }
 
   static double antiwidth(num value) {
-    return 1536 * value /_width;
+    // return 1536 * value /_width;
+    return value;
   }
 
   static double antiheight(num value) {
-    return 754 * value /_height;
+    // return 754 * value /_height;
+    return value;
   }
 
   static double height(num value) {
-    return value * (_height / 754);
+    // return value * (_height / 754);
+    return value;
   }
 }
 

@@ -18,6 +18,7 @@ class Logic {
   }
 
   static void containerDownVelocity() {
+
     double containerToShipDistance = WorldState.shipZ -
         WorldState.boxPlaces[WorldState.currentTarget] *
             ContainerBoxDimensions.height -
@@ -102,13 +103,11 @@ class Logic {
       }
       velocityMap[key] = velocityList;
     });
-
     if (velocityProbability.length == 1) {
       List<double> coordinates = [];
       velocityProbability.forEach((key, value) {
         coordinates = velocityMap[key];
       });
-
       double numerator = 0;
       if (coordinates[1] != coordinates[0]) {
         numerator += Calc.integral(
@@ -168,7 +167,6 @@ class Logic {
                 (coordinates[3] - coordinates[2]),
             10);
       }
-      print("2 $denominator");
       WorldState.containerDownVelocity = numerator / denominator;
     } else {
       List<List<double>> coordinates = [];
@@ -225,7 +223,6 @@ class Logic {
                       (finalCoordinates[3] - finalCoordinates[2])),
               10);
         }
-
         double max3 = getXFromEquation(
             probabilities2[1], finalCoordinates[2], 0, finalCoordinates[3], 1);
         if (finalCoordinates[3] != finalCoordinates[2]) {
@@ -268,7 +265,6 @@ class Logic {
                   (finalCoordinates[1] - finalCoordinates[0]),
               10);
         }
-
         denominator += Calc.integral(max, max2, (x) => probabilities2[0], 10);
         if (finalCoordinates[2] != finalCoordinates[3]) {
           denominator += Calc.integral(
@@ -305,7 +301,6 @@ class Logic {
                   (finalCoordinates[5] - finalCoordinates[4]),
               10);
         }
-        print("3  $denominator");
         WorldState.containerDownVelocity = numerator / denominator;
       } else if (probabilities2[0] == probabilities2[1] && probabilities2[0] == commonPoint.y) {
         double max = getXFromEquation(
@@ -363,7 +358,6 @@ class Logic {
                   (finalCoordinates[5] - finalCoordinates[4]),
               10);
         }
-
         WorldState.containerDownVelocity = numerator / denominator;
       } else {
         double max = getXFromEquation(
@@ -434,7 +428,6 @@ class Logic {
                   (finalCoordinates[1] - finalCoordinates[0]),
               10);
         }
-
         denominator += Calc.integral(max, max2, (x) => probabilities2[0], 10);
 
         if (max3 != max2) {
@@ -463,11 +456,15 @@ class Logic {
                   (finalCoordinates[5] - finalCoordinates[4]),
               10);
         }
-
         WorldState.containerDownVelocity = numerator / denominator;
       }
     }
-    print(WorldState.containerDownVelocity);
+
+
+    WorldState.ropeLength = (WorldState.ropeLength + WorldState.containerDownVelocity / 100);
+
+
+        print("containerDownVelocity = " + WorldState.containerDownVelocity.toString());
     if (WorldState.containerToShipDistance < 0.5){
       WorldState.finishSimulation();
     }

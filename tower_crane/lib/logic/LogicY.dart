@@ -13,39 +13,43 @@ class LogicY {
   }
 
   static void carriageYVelocity() {
-    if (WorldState.ropeEndY !=
-        WorldState.targetCenters[WorldState.currentTarget].dy) {
-      double sensorY = (WorldState.ropeLength *
-              cos(_radianConverter(WorldState.windDirection)) *
-              sin(_radianConverter(WorldState.windSpeed)))
-          .abs();
+    // if (WorldState.ropeEndY !=
+    //     WorldState.targetCenters[WorldState.currentTarget].dy) {
+    print(1111);
+    if((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs() < 40) {
+      print((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs());
+      // double sensorY = (WorldState.ropeLength *
+      //         cos(_radianConverter(WorldState.windDirection)) *
+      //         sin(_radianConverter(WorldState.windSpeed)))
+      //     .abs();
+      double sensorY = (-WorldState.ropeEndY + WorldState.targetCenters[WorldState.currentTarget].dy).abs();
 
       List<String> sensorYList = [];
-      if (belongToInterval(sensorY, 0, 7)) {
+      if (belongToInterval(sensorY, 0, 5)) {
         sensorYList.add("veryLittle");
       }
 
-      if (belongToInterval(sensorY, 5, 30)) {
+      if (belongToInterval(sensorY, 1, 15)) {
         sensorYList.add("little");
       }
-      if (belongToInterval(sensorY, 10, 60)) {
+      if (belongToInterval(sensorY, 10, 30)) {
         sensorYList.add("medium");
       }
-
-      if (sensorY >= 50) sensorYList.add("far");
+      if (sensorY >= 20) sensorYList.add("far");
+      // else sensorYList.add("far");
 
       List<double> getIntersectionCoordinates = [];
       List<double> probabilities = [];
       if (sensorYList.length == 2) {
         if (sensorYList[0] == "veryLittle") {
+          getIntersectionCoordinates.add(1);
           getIntersectionCoordinates.add(5);
-          getIntersectionCoordinates.add(7);
         } else if (sensorYList[0] == "little") {
           getIntersectionCoordinates.add(10);
-          getIntersectionCoordinates.add(30);
+          getIntersectionCoordinates.add(15);
         } else if (sensorYList[0] == "medium") {
-          getIntersectionCoordinates.add(50);
-          getIntersectionCoordinates.add(60);
+          getIntersectionCoordinates.add(20);
+          getIntersectionCoordinates.add(30);
         }
 
         probabilities.add(Logic.getProbability(
@@ -81,28 +85,28 @@ class LogicY {
           velocityList.add(0);
           velocityList.add(0);
           velocityList.add(0);
-          velocityList.add(0.5);
+          velocityList.add(0.3);
         }
         if (key == "verySlowV") {
           velocityList.add(0);
+          velocityList.add(0.3);
           velocityList.add(0.5);
-          velocityList.add(1);
-          velocityList.add(2);
+          velocityList.add(0.7);
         }
         if (key == "slowV") {
-          velocityList.add(1);
+          velocityList.add(0.5);
+          velocityList.add(0.7);
+          velocityList.add(1.5);
           velocityList.add(2);
-          velocityList.add(5);
-          velocityList.add(6);
         }
         if (key == "mediumV") {
-          velocityList.add(5);
+          velocityList.add(1.5);
+          velocityList.add(2);
           velocityList.add(6);
-          velocityList.add(8);
           velocityList.add(10);
         }
         if (key == "fastV") {
-          velocityList.add(8);
+          velocityList.add(6);
           velocityList.add(10);
           velocityList.add(20);
           velocityList.add(20);
@@ -314,8 +318,9 @@ class LogicY {
                     (finalCoordinates[5] - finalCoordinates[4]),
                 10);
           }
-          print("3  $denominator");
+          print("3_666  $denominator $numerator");
           WorldState.carriageYVelocity = numerator / denominator;
+          print(3.1);
         } else if (probabilities2[0] == probabilities2[1] &&
             probabilities2[0] == commonPoint.y) {
           double max = Logic.getXFromEquation(probabilities2[0],
@@ -334,7 +339,7 @@ class LogicY {
           }
           double max4 = Logic.getXFromEquation(probabilities2[1],
               finalCoordinates[4], 1, finalCoordinates[5], 0);
-
+          print(4);
           numerator += Calc.integral(max, max4, (x) => x * commonPoint.y, 10);
           if (finalCoordinates[5] != finalCoordinates[4]) {
             numerator += Calc.integral(
@@ -360,7 +365,7 @@ class LogicY {
                     (finalCoordinates[1] - finalCoordinates[0]),
                 10);
           }
-
+          print(5);
           denominator += Calc.integral(max, max4, (x) => commonPoint.y, 10);
           if (finalCoordinates[4] != finalCoordinates[5]) {
             denominator += Calc.integral(
@@ -390,7 +395,7 @@ class LogicY {
                         (finalCoordinates[1] - finalCoordinates[0])),
                 10);
           }
-
+          print(6);
           double max2 = 0, max3 = 0;
           if (probabilities2[0] > probabilities2[1]) {
             max2 = Logic.getXFromEquation(probabilities2[0],
@@ -433,7 +438,7 @@ class LogicY {
                         (finalCoordinates[5] - finalCoordinates[4])),
                 10);
           }
-
+          print(7);
           if (finalCoordinates[1] != finalCoordinates[0]) {
             denominator += Calc.integral(
                 finalCoordinates[0],
@@ -462,7 +467,7 @@ class LogicY {
           }
           denominator +=
               Calc.integral(max3, max4, (x) => probabilities2[1], 10);
-
+          print(8);
           if (finalCoordinates[5] != finalCoordinates[4]) {
             denominator += Calc.integral(
                 max4,
@@ -474,10 +479,12 @@ class LogicY {
                     (finalCoordinates[5] - finalCoordinates[4]),
                 10);
           }
-
+          print(9);
           WorldState.carriageYVelocity = numerator / denominator;
         }
       }
+    } else{
+      WorldState.carriageYVelocity =0;
     }
   }
 }

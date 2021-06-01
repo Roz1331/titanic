@@ -13,25 +13,28 @@ class LogicX {
   }
 
   static void carriageXVelocity() {
-    if (WorldState.ropeEndX !=
-        WorldState.targetCenters[WorldState.currentTarget].dx) {
-      double sensorX = (WorldState.ropeLength *
-              sin(_radianConverter(WorldState.windDirection)) *
-              sin(_radianConverter(WorldState.windSpeed)))
-          .abs();
+    // if (WorldState.ropeEndX !=
+    //     WorldState.targetCenters[WorldState.currentTarget].dx) {
+    if((WorldState.carriageX - WorldState.targetCenters[WorldState.currentTarget].dx).abs() < 60) {
+      // double sensorX = (WorldState.ropeLength *
+      //         sin(_radianConverter(WorldState.windDirection)) *
+      //         sin(_radianConverter(WorldState.windSpeed)))
+      //     .abs();
 
+      double sensorX = (-WorldState.ropeEndX + WorldState.targetCenters[WorldState.currentTarget].dx).abs();
       List<String> sensorXList = [];
       if (belongToInterval(sensorX, 0, 7)) {
         sensorXList.add("veryLittle");
       }
 
-      if (belongToInterval(sensorX, 5, 30)) {
+      if (belongToInterval(sensorX, 5, 20)) {
         sensorXList.add("little");
       }
-      if (belongToInterval(sensorX, 10, 60)) {
+      if (belongToInterval(sensorX, 15, 40)) {
         sensorXList.add("medium");
       }
-      if (sensorX >= 50) sensorXList.add("far");
+      if (sensorX >= 30) sensorXList.add("far");
+      // else sensorXList.add("far");
 
       List<double> getIntersectionCoordinates = [];
       List<double> probabilities = [];
@@ -174,7 +177,7 @@ class LogicX {
                   (coordinates[3] - coordinates[2]),
               10);
         }
-        print("2 $denominator");
+        // print("2 $denominator");
         WorldState.carriageXVelocity = numerator / denominator;
       } else {
         List<List<double>> coordinates = [];
@@ -313,7 +316,7 @@ class LogicX {
                     (finalCoordinates[5] - finalCoordinates[4]),
                 10);
           }
-          print("3  $denominator");
+          // print("3  $denominator");
           WorldState.carriageXVelocity = numerator / denominator;
         } else if (probabilities2[0] == probabilities2[1] &&
             probabilities2[0] == commonPoint.y) {
@@ -477,6 +480,8 @@ class LogicX {
           WorldState.carriageXVelocity = numerator / denominator;
         }
       }
+    } else{
+      WorldState.carriageXVelocity =0;
     }
   }
 }

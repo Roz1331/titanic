@@ -11,7 +11,7 @@ class WorldState {
   static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
   static double windDirection = 0;
   static double windSpeed = 0;
-  static int ropeLength = 40;
+  static double ropeLength = 40;
 
   static bool isSimulated = false;
 
@@ -39,7 +39,7 @@ class WorldState {
   static double idealRopeEndY = ropeEndY;
   static double idealRopeEndZ = ropeEndZ;
 
-  static var boxPlaces = [0, 1, 0, 4, 3, 3, 0, 4, 0, 1, 2, 3];
+  static var boxPlaces = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   static List<Offset> targetCenters = [];
   static int currentTarget = 0;
 
@@ -69,6 +69,14 @@ class WorldState {
     ropeEndX = targetCenters[currentTarget].dx.antiw;
     ropeEndY = targetCenters[currentTarget].dy.antih;
     ropeEndZ = 70;
+    ropeLength = 40;
+    containerDownVelocity = 0;
+    containerUpVelocity = 0;
+    carriageXVelocity = 0;
+    carriageYVelocity = 0;
+    containerToShipDistance = 118;
+    containerSpeedDifference = 45;
+    oldSpeed=WorldState.windSpeed;
     WorldState.isSimulated = false;
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
@@ -85,5 +93,9 @@ class WorldState {
 
 
   static double oldSpeed=0;
+
+  static String toSstring() {
+    return "WorldState{shipX: $shipX, shipY: $shipY, shipZ: $shipZ, waveZ: $waveZ, waveFunction: $waveFunction, windDirection: $windDirection, windSpeed: $windSpeed, ropeLength: $ropeLength, isSimulated: $isSimulated, ropeEndX: $ropeEndX, ropeEndY: $ropeEndY, ropeEndZ: $ropeEndZ, idealRopeEndX: $idealRopeEndX, idealRopeEndY: $idealRopeEndY, idealRopeEndZ: $idealRopeEndZ, boxPlaces: $boxPlaces, targetCenters:, currentTarget: $currentTarget, carriageX: $carriageX, carriageY: $carriageY, carriageZ: $carriageZ, containerBoxX: $containerBoxX, containerBoxY: $containerBoxY, containerBoxZ: $containerBoxZ, containerDownVelocity: $containerDownVelocity, containerUpVelocity: $containerUpVelocity, carriageXVelocity: $carriageXVelocity, carriageYVelocity: $carriageYVelocity, containerToShipDistance: $containerToShipDistance, containerSpeedDifference: $containerSpeedDifference, oldSpeed: $oldSpeed}\n";
+  }
 
 }
