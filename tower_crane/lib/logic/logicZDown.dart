@@ -465,7 +465,7 @@ class Logic {
 
 
         print("containerDownVelocity = " + WorldState.containerDownVelocity.toString());
-    if (WorldState.containerToShipDistance < 0.5){
+    if (WorldState.containerToShipDistance < 1.5){
       WorldState.finishSimulation();
     }
   }
