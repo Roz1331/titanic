@@ -463,8 +463,5 @@ class LogicY {
         WorldState.carriageYVelocity = numerator / denominator;
       }
     }
-    if (WorldState.ropeEndY == WorldState.targetCenters[WorldState.currentTarget].dy){
-      WorldState.finishSimulation();
-    }
   }
 }
