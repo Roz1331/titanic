@@ -46,7 +46,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
     timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
       setState(() {
         radians += 0.01;
-        Physics.containerMovement();
+        Physics.containerMovementWithBlocks();
         if (WorldState.isSimulated) {
           Logic.containerDownVelocity();
           LogicZUp.containerUpVelocity();
@@ -59,11 +59,12 @@ class _PaintersLayoutState extends State<PaintersLayout> {
               WorldState.ropeEndY,
               WorldState.ropeEndZ +
                   ((WorldState.containerDownVelocity -
-                              WorldState.containerUpVelocity) /
+                              WorldState.containerUpVelocity / 10) /
                           10)
                       .h);
         }
       });
+      print("Wind speed " + WorldState.windSpeed.toString());
       WorldState.shipZ += WaveDimensions.amplitude *
           (WorldState.waveFunction(radians) -
               WorldState.waveFunction(radians - 0.01));

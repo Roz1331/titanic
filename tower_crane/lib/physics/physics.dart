@@ -22,9 +22,8 @@ class Physics {
   static void windAbsorbtion() {
     double k = 0.015;
     double dx = WorldState.idealRopeEndX - WorldState.ropeEndX;
-      double dy = WorldState.idealRopeEndY - WorldState.ropeEndY;
+    double dy = WorldState.idealRopeEndY - WorldState.ropeEndY;
     if (!_containerHasReachedIdeal()) {
-      
       WorldState.setRopeCoords(
         WorldState.ropeEndX + dx * k,
         WorldState.ropeEndY + dy * k,
@@ -56,7 +55,7 @@ class Physics {
   //обнуляет ветер при достижении контейнера
   static void containerMovementWithBlocks() {
     double windDirection = WorldState.windDirection;
-    
+
     int currentTarget = WorldState.currentTarget;
 
     int sector = 0;
@@ -75,7 +74,7 @@ class Physics {
     if (belongToInterval(windDirection, 282.5, 304)) sector = 11;
     if (belongToInterval(windDirection, 304, 333.5)) sector = 12;
 
-    Map map = Map();
+    Map<String, int> map = Map();
     map["u"] = -1;
     map["ur"] = -1;
     map["r"] = -1;
@@ -87,31 +86,46 @@ class Physics {
 
     if (currentTarget > 5)
       map["d"] = 0;
-    else
+    else {
       map["u"] = 0;
+    }
+
     if (currentTarget == 0 || currentTarget == 6) map["l"] = 0;
     if (currentTarget == 5 || currentTarget == 11) map["r"] = 0;
-    if (currentTarget == 0) map["ul"] = 0;
-    if (currentTarget == 5) map["ur"] = 0;
-    if (currentTarget == 6) map["dl"] = 0;
-    if (currentTarget == 11) map["dr"] = 0;
+    if (currentTarget < 7) map["ul"] = 0;
+    if (currentTarget == 11 || currentTarget < 6) map["ur"] = 0;
+    if (currentTarget == 0 || currentTarget > 5) map["dl"] = 0;
+    if (currentTarget > 4) map["dr"] = 0;
 
-    for (var item in map.entries) {
-      if (item.value == -1) {
-        if (item.key == "u") map["u"] = WorldState.boxPlaces[currentTarget - 6];
-        if (item.key == "d") map["d"] = WorldState.boxPlaces[currentTarget + 6];
-        if (item.key == "l") map["l"] = WorldState.boxPlaces[currentTarget - 1];
-        if (item.key == "r") map["r"] = WorldState.boxPlaces[currentTarget + 1];
-        if (item.key == "ur")
-          map["ur"] = WorldState.boxPlaces[currentTarget - 5];
-        if (item.key == "dr")
-          map["dr"] = WorldState.boxPlaces[currentTarget + 7];
-        if (item.key == "dl")
-          map["dl"] = WorldState.boxPlaces[currentTarget + 5];
-        if (item.key == "ul")
-          map["ul"] = WorldState.boxPlaces[currentTarget - 7];
+    map.forEach((key, value) {
+      if (key == "u") {
+        if (value == -1) map["u"] = WorldState.boxPlaces[currentTarget - 6];
       }
-    }
+      if (key == "d") {
+        if (value == -1) map["d"] = WorldState.boxPlaces[currentTarget + 6];
+      }
+      if (key == "l") {
+        if (value == -1) map["l"] = WorldState.boxPlaces[currentTarget - 1];
+      }
+      if (key == "r") {
+        if (value == -1) map["r"] = WorldState.boxPlaces[currentTarget + 1];
+      }
+      if (key == "ur") {
+        if (value == -1) map["ur"] = WorldState.boxPlaces[currentTarget - 5];
+      }
+
+      if (key == "dr") {
+        if (value == -1) map["dr"] = WorldState.boxPlaces[currentTarget + 7];
+      }
+
+      if (key == "dl") {
+        if (value == -1) map["dl"] = WorldState.boxPlaces[currentTarget + 5];
+      }
+
+      if (key == "ul") {
+        if (value == -1) map["ul"] = WorldState.boxPlaces[currentTarget - 7];
+      }
+    });
 
     switch (sector) {
       case 1:
