@@ -18,6 +18,7 @@ class Logic {
   }
 
   static void containerDownVelocity() {
+
     double containerToShipDistance = WorldState.shipZ -
         WorldState.boxPlaces[WorldState.currentTarget] *
             ContainerBoxDimensions.height -
@@ -458,7 +459,12 @@ class Logic {
         WorldState.containerDownVelocity = numerator / denominator;
       }
     }
-    print("containerDownVelocity = " + WorldState.containerDownVelocity.toString());
+
+
+    WorldState.ropeLength = (WorldState.ropeLength + WorldState.containerDownVelocity / 100);
+
+
+        print("containerDownVelocity = " + WorldState.containerDownVelocity.toString());
     if (WorldState.containerToShipDistance < 0.5){
       WorldState.finishSimulation();
     }

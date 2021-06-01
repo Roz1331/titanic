@@ -482,5 +482,6 @@ class LogicZUp {
       }
       print(WorldState.containerUpVelocity);
     }
+    WorldState.ropeLength = (WorldState.ropeLength - WorldState.containerUpVelocity / 100);
   }
 }

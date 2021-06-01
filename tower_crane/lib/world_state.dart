@@ -11,7 +11,7 @@ class WorldState {
   static Function(double) waveFunction = WaveFunctionsHelper.functions[0];
   static double windDirection = 0;
   static double windSpeed = 0;
-  static int ropeLength = 40;
+  static double ropeLength = 40;
 
   static bool isSimulated = false;
 
@@ -39,7 +39,7 @@ class WorldState {
   static double idealRopeEndY = ropeEndY;
   static double idealRopeEndZ = ropeEndZ;
 
-  static var boxPlaces = [0, 1, 0, 4, 3, 3, 0, 4, 0, 1, 2, 3];
+  static var boxPlaces = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   static List<Offset> targetCenters = [];
   static int currentTarget = 0;
 

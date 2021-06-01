@@ -22,6 +22,11 @@ class PaintersLayout extends StatefulWidget {
 }
 
 class _PaintersLayoutState extends State<PaintersLayout> {
+
+  static double _radianConverter(double degree) {
+    return degree * pi / 180;
+  }
+
   Timer timer;
   double radians = 0.0;
   Offset tappedPosition = Offset(0, 0);
@@ -52,14 +57,14 @@ class _PaintersLayoutState extends State<PaintersLayout> {
           LogicZUp.containerUpVelocity();
           LogicX.carriageXVelocity();
           LogicY.carriageYVelocity();
-          WorldState.carriageX += ((WorldState.carriageXVelocity * sin(WorldState.windDirection).sign) / 10).w;
-          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(WorldState.windDirection).sign) / 10).h;
+          WorldState.carriageX += ((WorldState.carriageXVelocity * sin(_radianConverter(WorldState.windDirection)).sign * sin(_radianConverter(WorldState.windSpeed))) / 10).w;
+          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(_radianConverter(WorldState.windDirection)).sign *(-1) * sin(_radianConverter(WorldState.windSpeed))) / 10).h;
           WorldState.setRopeCoords(
               WorldState.ropeEndX,
               WorldState.ropeEndY,
               WorldState.ropeEndZ +
                   ((WorldState.containerDownVelocity -
-                              WorldState.containerUpVelocity) /
+                              WorldState.containerUpVelocity / 10) /
                           10)
                       .h);
         }
