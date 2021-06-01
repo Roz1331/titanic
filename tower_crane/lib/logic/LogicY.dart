@@ -18,10 +18,11 @@ class LogicY {
     print(1111);
     if((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs() < 40) {
       print((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs());
-      double sensorY = (WorldState.ropeLength *
-              cos(_radianConverter(WorldState.windDirection)) *
-              sin(_radianConverter(WorldState.windSpeed)))
-          .abs();
+      // double sensorY = (WorldState.ropeLength *
+      //         cos(_radianConverter(WorldState.windDirection)) *
+      //         sin(_radianConverter(WorldState.windSpeed)))
+      //     .abs();
+      double sensorY = (-WorldState.ropeEndY + WorldState.targetCenters[WorldState.currentTarget].dy).abs();
 
       List<String> sensorYList = [];
       if (belongToInterval(sensorY, 0, 5)) {
@@ -35,6 +36,7 @@ class LogicY {
         sensorYList.add("medium");
       }
       if (sensorY >= 20) sensorYList.add("far");
+      // else sensorYList.add("far");
 
       List<double> getIntersectionCoordinates = [];
       List<double> probabilities = [];
@@ -481,6 +483,8 @@ class LogicY {
           WorldState.carriageYVelocity = numerator / denominator;
         }
       }
+    } else{
+      WorldState.carriageYVelocity =0;
     }
   }
 }

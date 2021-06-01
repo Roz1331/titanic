@@ -53,12 +53,13 @@ class _PaintersLayoutState extends State<PaintersLayout> {
         radians += 0.01;
         Physics.containerMovement();
         if (WorldState.isSimulated) {
+          print(WorldState.toSstring());
           Logic.containerDownVelocity();
           LogicZUp.containerUpVelocity();
           LogicX.carriageXVelocity();
           LogicY.carriageYVelocity();
-          WorldState.carriageX += ((WorldState.carriageXVelocity * sin(_radianConverter(WorldState.windDirection)).sign * sin(_radianConverter(WorldState.windSpeed))) / 10).w;
-          WorldState.carriageY += ((WorldState.carriageYVelocity * cos(_radianConverter(WorldState.windDirection)).sign *(-1) * sin(_radianConverter(WorldState.windSpeed))) / 10).h;
+          WorldState.carriageX += ((WorldState.carriageXVelocity * (-WorldState.ropeEndX + WorldState.targetCenters[WorldState.currentTarget].dx).sign) / 10).w;
+          WorldState.carriageY += ((WorldState.carriageYVelocity * (-WorldState.ropeEndY + WorldState.targetCenters[WorldState.currentTarget].dy).sign) / 10).h;
           WorldState.setRopeCoords(
               WorldState.ropeEndX,
               WorldState.ropeEndY,

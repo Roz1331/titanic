@@ -16,11 +16,12 @@ class LogicX {
     // if (WorldState.ropeEndX !=
     //     WorldState.targetCenters[WorldState.currentTarget].dx) {
     if((WorldState.carriageX - WorldState.targetCenters[WorldState.currentTarget].dx).abs() < 60) {
-      double sensorX = (WorldState.ropeLength *
-              sin(_radianConverter(WorldState.windDirection)) *
-              sin(_radianConverter(WorldState.windSpeed)))
-          .abs();
+      // double sensorX = (WorldState.ropeLength *
+      //         sin(_radianConverter(WorldState.windDirection)) *
+      //         sin(_radianConverter(WorldState.windSpeed)))
+      //     .abs();
 
+      double sensorX = (-WorldState.ropeEndX + WorldState.targetCenters[WorldState.currentTarget].dx).abs();
       List<String> sensorXList = [];
       if (belongToInterval(sensorX, 0, 7)) {
         sensorXList.add("veryLittle");
@@ -33,6 +34,7 @@ class LogicX {
         sensorXList.add("medium");
       }
       if (sensorX >= 30) sensorXList.add("far");
+      // else sensorXList.add("far");
 
       List<double> getIntersectionCoordinates = [];
       List<double> probabilities = [];
@@ -478,6 +480,8 @@ class LogicX {
           WorldState.carriageXVelocity = numerator / denominator;
         }
       }
+    } else{
+      WorldState.carriageXVelocity =0;
     }
   }
 }
