@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:tower_crane/logic/logicZDown.dart';
+import 'package:tower_crane/logic.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/ui/settings/simul_listener.dart';
 import './ui/responsive_size.dart';
@@ -76,17 +76,7 @@ class WorldState {
     SimulationListener.streamController.add(WorldState.isSimulated);
   }
 
-
   static double containerDownVelocity = 0;
-  static double containerUpVelocity = 0;
-
-  static double carriageXVelocity = 0;
-  static double carriageYVelocity = 0;
 
   static double containerToShipDistance = 118;
-  static double containerSpeedDifference = 45;
-
-
-  static double oldSpeed=0;
-
 }

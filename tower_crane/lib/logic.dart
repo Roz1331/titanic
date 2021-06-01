@@ -1,18 +1,18 @@
 import 'dart:math';
 
 import 'package:calculess/calculess.dart';
-import 'package:tower_crane/logic/common_point.dart';
+import 'package:tower_crane/common_point.dart';
 import 'package:tower_crane/physics/physics.dart';
 import 'package:tower_crane/stupid_constants.dart';
 import 'package:tower_crane/world_state.dart';
 
 class Logic {
-  static double getProbability(
+  static double _getProbability(
       double dist, double x1, double y1, double x2, double y2) {
     return (dist * (y2 - y1) - x1 * y2 + y1 * x2) / (x2 - x1);
   }
 
-  static double getXFromEquation(
+  static double _getXFromEquation(
       double y, double x1, double y1, double x2, double y2) {
     return (y * (x2 - x1) - y1 * x2 + x1 * y2) / (y2 - y1);
   }
@@ -49,9 +49,9 @@ class Logic {
         getIntersectionCoordinates.add(70);
       }
 
-      probabilities.add(getProbability(containerToShipDistance,
+      probabilities.add(_getProbability(containerToShipDistance,
           getIntersectionCoordinates[0], 0, getIntersectionCoordinates[1], 1));
-      probabilities.add(getProbability(containerToShipDistance,
+      probabilities.add(_getProbability(containerToShipDistance,
           getIntersectionCoordinates[0], 1, getIntersectionCoordinates[1], 0));
     } else
       probabilities.add(1);
@@ -169,7 +169,7 @@ class Logic {
             10);
       }
       print("2 $denominator");
-      WorldState.carriageYVelocity = numerator / denominator;
+      WorldState.containerDownVelocity = numerator / denominator;
     } else {
       List<List<double>> coordinates = [];
       List<double> probabilities2 = [];
@@ -195,7 +195,7 @@ class Logic {
       double denominator = 0;
       if (probabilities2[0] > commonPoint.y &&
           probabilities2[1] > commonPoint.y) {
-        double max = getXFromEquation(
+        double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
         if (finalCoordinates[1] != finalCoordinates[0]) {
           numerator += Calc.integral(
@@ -210,7 +210,7 @@ class Logic {
               10);
         }
 
-        double max2 = getXFromEquation(
+        double max2 = _getXFromEquation(
             probabilities2[0], finalCoordinates[2], 1, finalCoordinates[3], 0);
         numerator += Calc.integral(max, max2, (x) => x * probabilities2[0], 10);
         if (finalCoordinates[3] != finalCoordinates[2]) {
@@ -226,7 +226,7 @@ class Logic {
               10);
         }
 
-        double max3 = getXFromEquation(
+        double max3 = _getXFromEquation(
             probabilities2[1], finalCoordinates[2], 0, finalCoordinates[3], 1);
         if (finalCoordinates[3] != finalCoordinates[2]) {
           numerator += Calc.integral(
@@ -241,7 +241,7 @@ class Logic {
               10);
         }
 
-        double max4 = getXFromEquation(
+        double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
         numerator +=
             Calc.integral(max3, max4, (x) => x * probabilities2[1], 10);
@@ -306,9 +306,9 @@ class Logic {
               10);
         }
         print("3  $denominator");
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       } else if (probabilities2[0] == probabilities2[1] && probabilities2[0] == commonPoint.y) {
-        double max = getXFromEquation(
+        double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
         if (finalCoordinates[1] != finalCoordinates[0]) {
           numerator += Calc.integral(
@@ -322,7 +322,7 @@ class Logic {
                       (finalCoordinates[1] - finalCoordinates[0])),
               10);
         }
-        double max4 = getXFromEquation(
+        double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
 
         numerator += Calc.integral(max, max4, (x) => x * commonPoint.y, 10);
@@ -364,9 +364,9 @@ class Logic {
               10);
         }
 
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       } else {
-        double max = getXFromEquation(
+        double max = _getXFromEquation(
             probabilities2[0], finalCoordinates[0], 0, finalCoordinates[1], 1);
         if (finalCoordinates[1] != finalCoordinates[0]) {
           numerator += Calc.integral(
@@ -383,14 +383,14 @@ class Logic {
 
         double max2 = 0, max3 = 0;
         if (probabilities2[0] > probabilities2[1]) {
-          max2 = getXFromEquation(probabilities2[0], finalCoordinates[2], 1,
+          max2 = _getXFromEquation(probabilities2[0], finalCoordinates[2], 1,
               finalCoordinates[3], 0);
-          max3 = getXFromEquation(probabilities2[1], finalCoordinates[2], 1,
+          max3 = _getXFromEquation(probabilities2[1], finalCoordinates[2], 1,
               finalCoordinates[3], 0);
         } else {
-          max2 = getXFromEquation(probabilities2[0], finalCoordinates[2], 0,
+          max2 = _getXFromEquation(probabilities2[0], finalCoordinates[2], 0,
               finalCoordinates[3], 1);
-          max3 = getXFromEquation(probabilities2[1], finalCoordinates[2], 0,
+          max3 = _getXFromEquation(probabilities2[1], finalCoordinates[2], 0,
               finalCoordinates[3], 1);
         }
         numerator += Calc.integral(max, max2, (x) => x * probabilities2[0], 10);
@@ -406,7 +406,7 @@ class Logic {
                       (max3 - max2)),
               10);
         }
-        double max4 = getXFromEquation(
+        double max4 = _getXFromEquation(
             probabilities2[1], finalCoordinates[4], 1, finalCoordinates[5], 0);
         numerator +=
             Calc.integral(max3, max4, (x) => x * probabilities2[1], 10);
@@ -464,10 +464,10 @@ class Logic {
               10);
         }
 
-        WorldState.carriageYVelocity = numerator / denominator;
+        WorldState.containerDownVelocity = numerator / denominator;
       }
     }
-    print(WorldState.carriageYVelocity);
+    print(WorldState.containerDownVelocity);
     if (WorldState.containerToShipDistance < 0.5){
       WorldState.finishSimulation();
     }
