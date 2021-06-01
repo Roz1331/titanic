@@ -16,7 +16,7 @@ class LogicY {
     if (WorldState.ropeEndY !=
         WorldState.targetCenters[WorldState.currentTarget].dy) {
       double sensorY = (WorldState.ropeLength *
-              sin(_radianConverter(WorldState.windDirection)) *
+              cos(_radianConverter(WorldState.windDirection)) *
               sin(_radianConverter(WorldState.windSpeed)))
           .abs();
 
@@ -31,6 +31,7 @@ class LogicY {
       if (belongToInterval(sensorY, 10, 60)) {
         sensorYList.add("medium");
       }
+
       if (sensorY >= 50) sensorYList.add("far");
 
       List<double> getIntersectionCoordinates = [];
