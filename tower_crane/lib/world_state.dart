@@ -64,10 +64,13 @@ class WorldState {
     currentTarget = currentTarget % 12;
     WorldState.carriageX = targetCenters[currentTarget].dx.antiw;
     WorldState.carriageY = targetCenters[currentTarget].dy.antih;
+
     WorldState.setRopeCoords(
         WorldState.carriageX, WorldState.carriageY, WorldState.ropeEndZ);
-    ropeEndX = targetCenters[currentTarget].dx.antiw;
-    ropeEndY = targetCenters[currentTarget].dy.antih;
+    WorldState.containerBoxX = WorldState.carriageX;
+    WorldState.containerBoxY = WorldState.carriageY;
+    ropeEndX = targetCenters[currentTarget].dx;
+    ropeEndY = targetCenters[currentTarget].dy;
     ropeEndZ = 70;
     WorldState.isSimulated = false;
     SimulationListener.streamController.add(WorldState.isSimulated);
