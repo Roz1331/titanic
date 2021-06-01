@@ -16,7 +16,7 @@ class LogicY {
     // if (WorldState.ropeEndY !=
     //     WorldState.targetCenters[WorldState.currentTarget].dy) {
     print(1111);
-    if((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs() < 40) {
+    if((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs() < 30) {
       print((WorldState.carriageY - WorldState.targetCenters[WorldState.currentTarget].dy).abs());
       // double sensorY = (WorldState.ropeLength *
       //         cos(_radianConverter(WorldState.windDirection)) *

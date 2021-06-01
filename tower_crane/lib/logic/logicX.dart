@@ -15,7 +15,7 @@ class LogicX {
   static void carriageXVelocity() {
     // if (WorldState.ropeEndX !=
     //     WorldState.targetCenters[WorldState.currentTarget].dx) {
-    if((WorldState.carriageX - WorldState.targetCenters[WorldState.currentTarget].dx).abs() < 60) {
+    if((WorldState.carriageX - WorldState.targetCenters[WorldState.currentTarget].dx).abs() < 50) {
       // double sensorX = (WorldState.ropeLength *
       //         sin(_radianConverter(WorldState.windDirection)) *
       //         sin(_radianConverter(WorldState.windSpeed)))
