@@ -65,7 +65,7 @@ class _PaintersLayoutState extends State<PaintersLayout> {
               WorldState.ropeEndY,
               WorldState.ropeEndZ +
                   ((WorldState.containerDownVelocity -
-                              WorldState.containerUpVelocity / 10) /
+                              WorldState.containerUpVelocity/10) /
                           10)
                       .h);
         }
